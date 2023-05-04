@@ -16,6 +16,18 @@ const routes: Routes = [
   { path: 'aboutus', component: AboutComponent },
   { path: 'portfolio', component: PortfolioComponent },
   { path: 'contacts', component: ContactsComponent },
+  {
+    path: 'access',
+    loadChildren: () =>
+      import('./access/access.module').then((m) => m.AccessModule),
+  },
+  {
+    path: 'personal-area',
+    loadChildren: () =>
+      import('./personal-area/personal-area.module').then(
+        (m) => m.PersonalAreaModule
+      ),
+  },
 ];
 
 @NgModule({
