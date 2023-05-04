@@ -8,7 +8,7 @@ describe('AccessComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AccessComponent]
+      declarations: [AccessComponent],
     });
     fixture = TestBed.createComponent(AccessComponent);
     component = fixture.componentInstance;
