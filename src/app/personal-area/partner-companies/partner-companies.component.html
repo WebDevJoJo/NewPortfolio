@@ -5,3 +5,43 @@
   laudantium eligendi inventore aspernatur, dignissimos vero minus quos delectus
   molestiae sit?
 </h3>
+<mat-table [dataSource]="dataSource">
+  <!--Name column-->
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef>Company name</mat-header-cell>
+    <mat-cell *matCellDef="let c">{{ c.name }}</mat-cell>
+  </ng-container>
+
+  <!--Email column-->
+  <ng-container matColumnDef="email">
+    <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+    <mat-cell *matCellDef="let c">{{ c.email }}</mat-cell>
+  </ng-container>
+
+  <!--VAT column-->
+  <ng-container matColumnDef="vat">
+    <mat-header-cell *matHeaderCellDef>VAT</mat-header-cell>
+    <mat-cell *matCellDef="let c">{{ c.vat }}</mat-cell>
+  </ng-container>
+
+  <!--Phone column-->
+  <ng-container matColumnDef="phone">
+    <mat-header-cell *matHeaderCellDef>Phone</mat-header-cell>
+    <mat-cell *matCellDef="let c">{{ c.phone }}</mat-cell>
+  </ng-container>
+
+  <!--Country column-->
+  <ng-container matColumnDef="country">
+    <mat-header-cell *matHeaderCellDef>Country</mat-header-cell>
+    <mat-cell *matCellDef="let c">{{ c.country }}</mat-cell>
+  </ng-container>
+
+  <!--Addresses column-->
+  <ng-container matColumnDef="addresses">
+    <mat-header-cell *matHeaderCellDef>Addresses</mat-header-cell>
+    <mat-cell *matCellDef="let c">{{ c.addresses }}</mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+</mat-table>

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
+import { MatTableModule } from '@angular/material/table';
 
 import { WelcomeComponent } from './welcome/welcome.component';
 import { PreventiveComponent } from './preventive/preventive.component';
@@ -22,6 +23,6 @@ const routes: Routes = [
     PartnerCompaniesComponent,
     WelcomeComponent,
   ],
-  imports: [CommonModule, RouterModule.forChild(routes)],
+  imports: [CommonModule, RouterModule.forChild(routes), MatTableModule],
 })
 export class PersonalAreaModule {}
