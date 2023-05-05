@@ -9,6 +9,7 @@ import { PartnerCompaniesComponent } from './partner-companies/partner-companies
 
 const routes: Routes = [
   { path: '', component: WelcomeComponent },
+  { path: 'welcome', component: WelcomeComponent },
   { path: 'preventive', component: PreventiveComponent },
   { path: 'payment', component: PaymentMethodsComponent },
   { path: 'companies', component: PartnerCompaniesComponent },
