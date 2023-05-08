@@ -8,7 +8,7 @@
   </h3>
 </div>
 
-<mat-table [dataSource]="companiesList">
+<mat-table [dataSource]="companiesList" class="mat-elevation-z2">
   <!--Name column-->
   <ng-container matColumnDef="name">
     <mat-header-cell *matHeaderCellDef>Company name</mat-header-cell>
@@ -46,5 +46,5 @@
   </ng-container>
 
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let company; columns: displayedColumns"></mat-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
 </mat-table>
