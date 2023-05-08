@@ -9,39 +9,39 @@
   <!--Name column-->
   <ng-container matColumnDef="name">
     <mat-header-cell *matHeaderCellDef>Company name</mat-header-cell>
-    <mat-cell *matCellDef="let c">{{ c.name }}</mat-cell>
+    <mat-cell *matCellDef="let company">{{ company.name }}</mat-cell>
   </ng-container>
 
   <!--Email column-->
   <ng-container matColumnDef="email">
     <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
-    <mat-cell *matCellDef="let c">{{ c.email }}</mat-cell>
+    <mat-cell *matCellDef="let company">{{ company.email }}</mat-cell>
   </ng-container>
 
   <!--VAT column-->
   <ng-container matColumnDef="vat">
     <mat-header-cell *matHeaderCellDef>VAT</mat-header-cell>
-    <mat-cell *matCellDef="let c">{{ c.vat }}</mat-cell>
+    <mat-cell *matCellDef="let company; of">{{ company.vat }}</mat-cell>
   </ng-container>
 
   <!--Phone column-->
   <ng-container matColumnDef="phone">
     <mat-header-cell *matHeaderCellDef>Phone</mat-header-cell>
-    <mat-cell *matCellDef="let c">{{ c.phone }}</mat-cell>
+    <mat-cell *matCellDef="let company">{{ company.phone }}</mat-cell>
   </ng-container>
 
   <!--Country column-->
   <ng-container matColumnDef="country">
     <mat-header-cell *matHeaderCellDef>Country</mat-header-cell>
-    <mat-cell *matCellDef="let c">{{ c.country }}</mat-cell>
+    <mat-cell *matCellDef="let company">{{ company.country }}</mat-cell>
   </ng-container>
 
   <!--Addresses column-->
   <ng-container matColumnDef="addresses">
     <mat-header-cell *matHeaderCellDef>Addresses</mat-header-cell>
-    <mat-cell *matCellDef="let c">{{ c.addresses }}</mat-cell>
+    <mat-cell *matCellDef="let company">{{ company.addresses }}</mat-cell>
   </ng-container>
 
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  <mat-row *matRowDef="let company; columns: displayedColumns"></mat-row>
 </mat-table>

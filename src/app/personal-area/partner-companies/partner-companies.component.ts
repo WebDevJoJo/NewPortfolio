@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { MatTableDataSource } from '@angular/material/table';
 
 interface Response {
   status: string;
@@ -67,6 +68,7 @@ interface ContactAddress {
 })
 export class PartnerCompaniesComponent implements OnInit {
   companiesList: CompanyDetails[] = [];
+  dataSource = new MatTableDataSource<CompanyDetails>(this.companiesList);
   displayedColumns: string[] = [
     'name',
     'email',
@@ -75,7 +77,6 @@ export class PartnerCompaniesComponent implements OnInit {
     'country',
     'addresses',
   ];
-  dataSource = this.companiesList;
 
   constructor(private http: HttpClient) {}
 
@@ -98,5 +99,6 @@ export class PartnerCompaniesComponent implements OnInit {
           });
         }
       });
+    console.log(this.companiesList);
   }
 }
