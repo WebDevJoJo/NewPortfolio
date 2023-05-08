@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 
 interface Response {
   status: string;
@@ -69,6 +68,7 @@ export class PartnerCompaniesComponent implements OnInit {
   companiesList: CompanyDetails[] = [];
   dataSource = this.companiesList;
   displayedColumns: string[] = [
+    'id',
     'name',
     'email',
     'vat',
@@ -77,28 +77,19 @@ export class PartnerCompaniesComponent implements OnInit {
     'addresses',
   ];
 
-  constructor(private http: HttpClient) {}
-
-  //Get the data from API and push them in the companiesList array
   ngOnInit(): void {
-    this.http
-      .get<Response>('https://fakerapi.it/api/v1/companies?_quantity=100')
-      .subscribe((response: Response) => {
-        for (let i = 0; i < 100; i++) {
-          this.companiesList.push({
-            id: response.data[i].id,
-            name: response.data[i].name,
-            email: response.data[i].email,
-            vat: response.data[i].vat,
-            phone: response.data[i].phone,
-            country: response.data[i].country,
-            addresses: response.data[i].addresses,
-            website: response.data[i].website,
-            image: response.data[i].image,
-            contact: response.data[i].contact,
-          });
-        }
-      });
+    this.populateCompaniesListArray();
+  }
+
+  async fetchData(): Promise<CompanyDetails[]> {
+    const response = await fetch('https://fakerapi.it/api/v1/companies?');
+    const data = await response.json();
+    return data.data as CompanyDetails[];
+  }
+
+  async populateCompaniesListArray(): Promise<void> {
+    const companiesList = await this.fetchData();
+    this.companiesList.push(...companiesList);
     console.log(this.companiesList);
   }
 }
