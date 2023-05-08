@@ -8,7 +8,13 @@
   </h3>
 </div>
 
-<mat-table [dataSource]="companiesList" class="mat-elevation-z2">
+<mat-table [dataSource]="dataSource" class="mat-elevation-z2">
+  <!--ID column-->
+  <ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+    <mat-cell *matCellDef="let company">{{ company.id }}</mat-cell>
+  </ng-container>
+
   <!--Name column-->
   <ng-container matColumnDef="name">
     <mat-header-cell *matHeaderCellDef>Company name</mat-header-cell>
