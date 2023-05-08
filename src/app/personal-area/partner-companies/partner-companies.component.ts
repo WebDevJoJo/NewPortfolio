@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { MatTableDataSource } from '@angular/material/table';
 
 interface Response {
   status: string;
@@ -79,6 +78,7 @@ export class PartnerCompaniesComponent implements OnInit {
 
   constructor(private http: HttpClient) {}
 
+  //Get the data from API and push them in the companiesList array
   ngOnInit(): void {
     this.http
       .get<Response>('https://fakerapi.it/api/v1/companies?_quantity=100')
