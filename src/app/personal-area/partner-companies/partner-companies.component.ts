@@ -68,7 +68,6 @@ interface ContactAddress {
 })
 export class PartnerCompaniesComponent implements OnInit {
   companiesList: CompanyDetails[] = [];
-  dataSource = new MatTableDataSource<CompanyDetails>(this.companiesList);
   displayedColumns: string[] = [
     'name',
     'email',
