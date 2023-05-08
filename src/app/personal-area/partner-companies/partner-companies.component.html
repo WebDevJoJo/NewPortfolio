@@ -24,7 +24,7 @@
   <!--VAT column-->
   <ng-container matColumnDef="vat">
     <mat-header-cell *matHeaderCellDef>VAT</mat-header-cell>
-    <mat-cell *matCellDef="let company; of">{{ company.vat }}</mat-cell>
+    <mat-cell *matCellDef="let company">{{ company.vat }}</mat-cell>
   </ng-container>
 
   <!--Phone column-->
