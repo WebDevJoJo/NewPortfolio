@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
-interface Response {
+export interface Response {
   status: string;
   code: number;
   total: number;
   data: CompanyDetails[];
 }
 
-interface CompanyDetails {
+export interface CompanyDetails {
   id: number;
   name: string;
   email: string;
@@ -20,7 +20,7 @@ interface CompanyDetails {
   contact: CompanyContact[];
 }
 
-interface CompanyAddresses {
+export interface CompanyAddresses {
   id: number;
   street: string;
   streetName: string;
@@ -33,7 +33,7 @@ interface CompanyAddresses {
   longitude: number;
 }
 
-interface CompanyContact {
+export interface CompanyContact {
   id: number;
   firstname: string;
   lastname: string;
@@ -46,7 +46,7 @@ interface CompanyContact {
   image: string;
 }
 
-interface ContactAddress {
+export interface ContactAddress {
   id: number;
   street: string;
   streetName: string;
@@ -65,10 +65,14 @@ interface ContactAddress {
   styleUrls: ['./partner-companies.component.scss'],
 })
 export class PartnerCompaniesComponent implements OnInit {
+  filtersCategoryNotApplied: string = 'Name, Email, VAT, Phone, Country';
+  filtersCategoryApplied: string =
+    this.filtersCategoryNotApplied + ' | FILTERS APPLIED!';
+  filtersCategory: string = this.filtersCategoryNotApplied;
   companiesList: CompanyDetails[] = [];
-  dataSource = this.companiesList;
+  countriesList: string[] = [];
+  countriesSortedList: string[] = [];
   displayedColumns: string[] = [
-    'id',
     'name',
     'email',
     'vat',
@@ -76,20 +80,89 @@ export class PartnerCompaniesComponent implements OnInit {
     'country',
     'addresses',
   ];
+  dataSource: CompanyDetails[] = [];
+  searchName: string = '';
+  searchEmail: string = '';
+  searchVat: string = '';
+  searchPhone: string = '';
+  searchCountry: string = '';
+  selectedCountry = '';
+  filteredCompanies = this.companiesList;
 
   ngOnInit(): void {
-    this.populateCompaniesListArray();
+    this.populateCompaniesListCountriesList();
   }
 
   async fetchData(): Promise<CompanyDetails[]> {
-    const response = await fetch('https://fakerapi.it/api/v1/companies?');
+    const response = await fetch(
+      'https://fakerapi.it/api/v1/companies?_quantity=100'
+    );
     const data = await response.json();
     return data.data as CompanyDetails[];
   }
 
-  async populateCompaniesListArray(): Promise<void> {
+  async populateCompaniesListCountriesList(): Promise<void> {
     const companiesList = await this.fetchData();
     this.companiesList.push(...companiesList);
-    console.log(this.companiesList);
+    this.countriesList = companiesList.map((company) => company.country);
+    this.dataSource = companiesList;
+    this.sortedCountriesFilterConstructor();
+  }
+
+  sortedCountriesFilterConstructor() {
+    this.countriesList.sort();
+    this.countriesSortedList = [...new Set(this.countriesList)];
+  }
+
+  companiesFilters(): void {
+    if (
+      this.searchName ||
+      this.searchEmail ||
+      this.searchVat ||
+      this.searchPhone ||
+      this.searchCountry
+    ) {
+      this.filteredCompanies = this.companiesList.filter(
+        (item) =>
+          item.name.toLowerCase().includes(this.searchName.toLowerCase()) &&
+          item.email.toLowerCase().includes(this.searchEmail.toLowerCase()) &&
+          item.vat
+            .toString()
+            .toLowerCase()
+            .includes(this.searchVat.toLowerCase()) &&
+          item.phone
+            .toString()
+            .toLowerCase()
+            .includes(this.searchPhone.toLowerCase()) &&
+          item.country.includes(this.searchCountry)
+      );
+    } else {
+      this.filteredCompanies = this.companiesList;
+    }
+    this.dataSource = this.filteredCompanies;
+  }
+
+  checkFilters(): void {
+    if (
+      (this.searchName ||
+        this.searchEmail ||
+        this.searchVat ||
+        this.searchPhone ||
+        this.searchCountry) &&
+      this.filteredCompanies.length != 100
+    ) {
+      this.filtersCategory = this.filtersCategoryApplied;
+    } else {
+      this.companiesFilters();
+    }
+  }
+
+  resetCompaniesFilters() {
+    this.searchName = '';
+    this.searchEmail = '';
+    this.searchVat = '';
+    this.searchPhone = '';
+    this.searchCountry = '';
+    this.companiesFilters();
   }
 }
