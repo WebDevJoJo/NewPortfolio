@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
   <h1 class="text-center">Partner companies</h1>
   <h3 class="text-center">
     Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus, eum.
@@ -8,49 +8,112 @@
   </h3>
 </div>
 
-<mat-table [dataSource]="dataSource" class="mat-elevation-z2">
-  <!--ID column-->
-  <ng-container matColumnDef="id">
-    <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
-    <mat-cell *matCellDef="let company">{{ company.id }}</mat-cell>
-  </ng-container>
+<div class="container">
+  <mat-accordion>
+    <mat-expansion-panel
+      class="mb-3"
+      (opened)="filtersCategory = filtersCategoryNotApplied"
+      (closed)="checkFilters()"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Search by filters
+          <mat-icon>search</mat-icon>
+        </mat-panel-title>
+        <mat-panel-description>
+          {{ filtersCategory }}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-form-field appearance="fill" class="mx-2">
+        <mat-label>Name</mat-label>
+        <input matInput [(ngModel)]="searchName" />
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="mx-2">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" [(ngModel)]="searchEmail" />
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="mx-2">
+        <mat-label>VAT</mat-label>
+        <input matInput type="number" [(ngModel)]="searchVat" />
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="mx-2">
+        <mat-label>Phone</mat-label>
+        <input matInput type="number" [(ngModel)]="searchPhone" />
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="mx-2">
+        <mat-label>Coutry</mat-label>
+        <mat-select [(value)]="selectedCountry" [(ngModel)]="searchCountry">
+          <mat-option>None</mat-option>
+          <mat-option
+            *ngFor="let country of countriesSortedList"
+            [value]="country"
+            >{{ country }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+      <div>
+        <button
+          mat-fab
+          extended
+          color="primary"
+          class="mx-2"
+          (click)="companiesFilters()"
+        >
+          <mat-icon>search</mat-icon>
+          Go!
+        </button>
+        <button
+          mat-fab
+          extended
+          color="warn"
+          class="mx-2"
+          (click)="resetCompaniesFilters()"
+        >
+          Reset <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <mat-table [dataSource]="dataSource" class="mat-elevation-z4">
+    <!--Name column-->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef>Company name</mat-header-cell>
+      <mat-cell *matCellDef="let company"> {{ company.name }} </mat-cell>
+    </ng-container>
 
-  <!--Name column-->
-  <ng-container matColumnDef="name">
-    <mat-header-cell *matHeaderCellDef>Company name</mat-header-cell>
-    <mat-cell *matCellDef="let company">{{ company.name }}</mat-cell>
-  </ng-container>
+    <!--Email column-->
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+      <mat-cell *matCellDef="let company"> {{ company.email }} </mat-cell>
+    </ng-container>
 
-  <!--Email column-->
-  <ng-container matColumnDef="email">
-    <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
-    <mat-cell *matCellDef="let company">{{ company.email }}</mat-cell>
-  </ng-container>
+    <!--VAT column-->
+    <ng-container matColumnDef="vat">
+      <mat-header-cell *matHeaderCellDef>VAT</mat-header-cell>
+      <mat-cell *matCellDef="let company"> {{ company.vat }} </mat-cell>
+    </ng-container>
 
-  <!--VAT column-->
-  <ng-container matColumnDef="vat">
-    <mat-header-cell *matHeaderCellDef>VAT</mat-header-cell>
-    <mat-cell *matCellDef="let company">{{ company.vat }}</mat-cell>
-  </ng-container>
+    <!--Phone column-->
+    <ng-container matColumnDef="phone">
+      <mat-header-cell *matHeaderCellDef>Phone</mat-header-cell>
+      <mat-cell *matCellDef="let company"> {{ company.phone }} </mat-cell>
+    </ng-container>
 
-  <!--Phone column-->
-  <ng-container matColumnDef="phone">
-    <mat-header-cell *matHeaderCellDef>Phone</mat-header-cell>
-    <mat-cell *matCellDef="let company">{{ company.phone }}</mat-cell>
-  </ng-container>
+    <!--Country column-->
+    <ng-container matColumnDef="country">
+      <mat-header-cell *matHeaderCellDef>Country</mat-header-cell>
+      <mat-cell *matCellDef="let company"> {{ company.country }} </mat-cell>
+    </ng-container>
 
-  <!--Country column-->
-  <ng-container matColumnDef="country">
-    <mat-header-cell *matHeaderCellDef>Country</mat-header-cell>
-    <mat-cell *matCellDef="let company">{{ company.country }}</mat-cell>
-  </ng-container>
+    <!--Addresses column-->
+    <ng-container matColumnDef="addresses">
+      <mat-header-cell *matHeaderCellDef>Addresses</mat-header-cell>
+      <mat-cell *matCellDef="let company">
+        {{ company.addresses[0].street }}
+      </mat-cell>
+    </ng-container>
 
-  <!--Addresses column-->
-  <ng-container matColumnDef="addresses">
-    <mat-header-cell *matHeaderCellDef>Addresses</mat-header-cell>
-    <mat-cell *matCellDef="let company">{{ company.addresses }}</mat-cell>
-  </ng-container>
-
-  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
-</mat-table>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+</div>
