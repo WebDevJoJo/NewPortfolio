@@ -68,8 +68,10 @@ export interface ContactAddress {
   selector: 'app-partner-companies',
   templateUrl: './partner-companies.component.html',
   styleUrls: ['./partner-companies.component.scss'],
+  providers: [MatDialog],
 })
 export class PartnerCompaniesComponent implements OnInit {
+  extendedDetails: CompanyDetails[] = [];
   filtersCategoryNotApplied: string = 'Name, Email, VAT, Phone, Country';
   filtersCategoryApplied: string =
     this.filtersCategoryNotApplied + ' | FILTERS APPLIED!';
@@ -175,62 +177,13 @@ export class PartnerCompaniesComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogCompany, {
-      data: {},
+      data: { extendedDetails: this.companiesList },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log('Dialog closed');
     });
   }
-}
-
-export interface DialogDataCompany {
-  id: number;
-  name: string;
-  email: string;
-  vat: number;
-  phone: number;
-  country: string;
-  addresses: DialogCompanyAddresses[];
-  website: string;
-  image: string;
-  contact: DialogCompanyContact[];
-}
-export interface DialogCompanyAddresses {
-  id: number;
-  street: string;
-  streetName: string;
-  buildingNumber: number;
-  city: string;
-  zipcode: number;
-  country: string;
-  country_code: string;
-  latitude: number;
-  longitude: number;
-}
-export interface DialogCompanyContact {
-  id: number;
-  firstname: string;
-  lastname: string;
-  email: string;
-  phone: number;
-  birthday: number;
-  gender: string;
-  address: DialogContactAddress[];
-  website: string;
-  image: string;
-}
-export interface DialogContactAddress {
-  id: number;
-  street: string;
-  streetName: string;
-  buildingNumber: number;
-  city: string;
-  zipcode: number;
-  country: string;
-  country_code: string;
-  latitude: number;
-  longitude: number;
 }
 
 @Component({
