@@ -9,11 +9,15 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { WelcomeComponent } from './welcome/welcome.component';
 import { PreventiveComponent } from './preventive/preventive.component';
 import { PaymentMethodsComponent } from './payment-methods/payment-methods.component';
-import { PartnerCompaniesComponent } from './partner-companies/partner-companies.component';
+import {
+  DialogCompany,
+  PartnerCompaniesComponent,
+} from './partner-companies/partner-companies.component';
 
 const routes: Routes = [
   { path: '', component: WelcomeComponent },
@@ -29,6 +33,7 @@ const routes: Routes = [
     PaymentMethodsComponent,
     PartnerCompaniesComponent,
     WelcomeComponent,
+    DialogCompany,
   ],
   imports: [
     CommonModule,
@@ -41,6 +46,7 @@ const routes: Routes = [
     MatInputModule,
     MatIconModule,
     MatButtonModule,
+    MatDialogModule,
   ],
 })
 export class PersonalAreaModule {}
