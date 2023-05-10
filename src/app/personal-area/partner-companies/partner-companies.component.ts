@@ -94,8 +94,6 @@ export class PartnerCompaniesComponent implements OnInit {
   selectedCountry = '';
   filteredCompanies = this.companiesList;
 
-  constructor(public dialog: MatDialog) {}
-
   ngOnInit(): void {
     this.populateCompaniesListCountriesList();
   }
@@ -171,5 +169,80 @@ export class PartnerCompaniesComponent implements OnInit {
     this.searchPhone = '';
     this.searchCountry = '';
     this.companiesFilters();
+  }
+
+  constructor(public dialog: MatDialog) {}
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(DialogCompany, {
+      data: {},
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('Dialog closed');
+    });
+  }
+}
+
+export interface DialogDataCompany {
+  id: number;
+  name: string;
+  email: string;
+  vat: number;
+  phone: number;
+  country: string;
+  addresses: DialogCompanyAddresses[];
+  website: string;
+  image: string;
+  contact: DialogCompanyContact[];
+}
+export interface DialogCompanyAddresses {
+  id: number;
+  street: string;
+  streetName: string;
+  buildingNumber: number;
+  city: string;
+  zipcode: number;
+  country: string;
+  country_code: string;
+  latitude: number;
+  longitude: number;
+}
+export interface DialogCompanyContact {
+  id: number;
+  firstname: string;
+  lastname: string;
+  email: string;
+  phone: number;
+  birthday: number;
+  gender: string;
+  address: DialogContactAddress[];
+  website: string;
+  image: string;
+}
+export interface DialogContactAddress {
+  id: number;
+  street: string;
+  streetName: string;
+  buildingNumber: number;
+  city: string;
+  zipcode: number;
+  country: string;
+  country_code: string;
+  latitude: number;
+  longitude: number;
+}
+
+@Component({
+  selector: 'dialog-company',
+  templateUrl: 'dialog-company.html',
+})
+export class DialogCompany {
+  constructor(
+    public dialogRef: MatDialogRef<DialogCompany>,
+    @Inject(MAT_DIALOG_DATA) public data: CompanyDetails
+  ) {}
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 }
