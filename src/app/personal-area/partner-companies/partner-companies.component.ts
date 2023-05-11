@@ -97,9 +97,11 @@ export class PartnerCompaniesComponent implements OnInit {
   }
 
   async fetchData(): Promise<CompanyDetails[]> {
-    const response = await fetch(
-      'https://fakerapi.it/api/v1/companies?_quantity=100'
-    );
+    const params = new URLSearchParams();
+    params.append('_quantity', '100');
+    const url = new URL('https://fakerapi.it/api/v1/companies');
+    url.search = params.toString();
+    const response = await fetch(url.toString());
     const data = await response.json();
     return data.data as CompanyDetails[];
   }
