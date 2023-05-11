@@ -5,23 +5,62 @@
       <mat-expansion-panel-header>
         <mat-panel-title>General</mat-panel-title>
       </mat-expansion-panel-header>
-      <p>This is the primary content of the panel.</p>
+      <mat-list role="list">
+        <mat-list-item role="listitem">Name: {{data.name}}</mat-list-item>
+        <mat-list-item role="listitem">Email: {{data.email}}</mat-list-item>
+        <mat-list-item role="listitem">VAT: {{data.vat}}</mat-list-item>
+        <mat-list-item role="listitem">Phone: {{data.phone}}</mat-list-item>
+        <mat-list-item role="listitem">Country: {{data.country}}</mat-list-item>
+        <mat-list-item role="listitem">Website: {{data.website}}</mat-list-item>
+      </mat-list>
     </mat-expansion-panel>
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>Addresses</mat-panel-title>
       </mat-expansion-panel-header>
-      <p>This is the primary content of the panel.</p>
+      <div class="row">
+        <div class="col" *ngFor="let addressDetails of data.addresses">
+          - {{addressDetails.buildingNumber}}, {{addressDetails.streetName}}
+          {{addressDetails.city}} ({{addressDetails.zipcode}})
+        </div>
+      </div>
     </mat-expansion-panel>
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>Contact</mat-panel-title>
       </mat-expansion-panel-header>
-      <p>This is the primary content of the panel.</p>
+      <mat-list>
+        <mat-list-item role="listitem">
+          Fisrt name: {{data.contact.firstname}}
+        </mat-list-item>
+        <mat-list-item role="listitem">
+          Last name: {{data.contact.lastname}}
+        </mat-list-item>
+        <mat-list-item role="listitem">
+          Email: {{data.contact.email}}
+        </mat-list-item>
+        <mat-list-item role="listitem">
+          Phone: {{data.contact.phone}}
+        </mat-list-item>
+        <mat-list-item role="listitem">
+          Birthday: {{data.contact.birthday}}
+        </mat-list-item>
+        <mat-list-item role="listitem">
+          Gender: {{data.contact.gender}}
+        </mat-list-item>
+        <mat-list-item role="listitem">
+          Website: {{data.contact.website}}
+        </mat-list-item>
+        <mat-list-item role="listitem">
+          Address: {{data.contact.address.buildingNumber}},
+          {{data.contact.address.streetName}} {{data.contact.address.city}}
+          ({{data.contact.address.zipcode}})
+        </mat-list-item>
+      </mat-list>
     </mat-expansion-panel>
   </mat-accordion>
 </div>
-<div mat-dialog-actions>
+<div mat-dialog-actions class="m-3">
   <button mat-mini-fab (click)="onNoClick()">
     <mat-icon>close</mat-icon>
   </button>

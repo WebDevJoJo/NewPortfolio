@@ -1,45 +1,39 @@
-<div class="container-fluid">
-  <h1 class="text-center">Partner companies</h1>
-  <h3 class="text-center">
+<div class="container text-center">
+  <h1>Partner companies</h1>
+  <h3>
     Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus, eum.
     Reiciendis quibusdam iste dolore, corporis dolores deserunt odio vitae
     laudantium eligendi inventore aspernatur, dignissimos vero minus quos
     delectus molestiae sit?
   </h3>
 </div>
-
 <div class="container">
-  <mat-accordion>
-    <mat-expansion-panel
-      class="mb-3"
-      (opened)="filtersCategory = filtersCategoryNotApplied"
-      (closed)="checkFilters()"
-    >
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Search by filters
-          <mat-icon>search</mat-icon>
-        </mat-panel-title>
-        <mat-panel-description>
-          {{ filtersCategory }}
-        </mat-panel-description>
-      </mat-expansion-panel-header>
+  <div class="row justify-content-center">
+    <div class="col-auto">
       <mat-form-field appearance="fill" class="mx-2">
         <mat-label>Name</mat-label>
         <input matInput [(ngModel)]="searchName" />
       </mat-form-field>
+    </div>
+    <div class="col-auto">
       <mat-form-field appearance="fill" class="mx-2">
         <mat-label>Email</mat-label>
         <input matInput type="email" [(ngModel)]="searchEmail" />
       </mat-form-field>
+    </div>
+    <div class="col-auto">
       <mat-form-field appearance="fill" class="mx-2">
         <mat-label>VAT</mat-label>
         <input matInput type="number" [(ngModel)]="searchVat" />
       </mat-form-field>
+    </div>
+    <div class="col-auto">
       <mat-form-field appearance="fill" class="mx-2">
         <mat-label>Phone</mat-label>
         <input matInput type="number" [(ngModel)]="searchPhone" />
       </mat-form-field>
+    </div>
+    <div class="col-auto">
       <mat-form-field appearance="fill" class="mx-2">
         <mat-label>Coutry</mat-label>
         <mat-select [(value)]="selectedCountry" [(ngModel)]="searchCountry">
@@ -51,30 +45,30 @@
           >
         </mat-select>
       </mat-form-field>
-      <div>
-        <button
-          mat-fab
-          extended
-          color="primary"
-          class="mx-2"
-          (click)="companiesFilters()"
-        >
-          <mat-icon>search</mat-icon>
-          Go!
-        </button>
-        <button
-          mat-fab
-          extended
-          color="warn"
-          class="mx-2"
-          (click)="resetCompaniesFilters()"
-        >
-          Reset <mat-icon>close</mat-icon>
-        </button>
-      </div>
-    </mat-expansion-panel>
-  </mat-accordion>
-  <mat-table [dataSource]="dataSource" class="mat-elevation-z4">
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <button
+      mat-fab
+      extended
+      color="primary"
+      class="mx-2"
+      (click)="companiesFilters()"
+    >
+      <mat-icon>search</mat-icon>
+      Go!
+    </button>
+    <button
+      mat-fab
+      extended
+      color="warn"
+      class="mx-2"
+      (click)="resetCompaniesFilters()"
+    >
+      Reset <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <mat-table [dataSource]="dataSource" class="mat-elevation-z4 mt-4">
     <!--Name column-->
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef>Company name</mat-header-cell>
@@ -116,7 +110,7 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row
       *matRowDef="let row; columns: displayedColumns"
-      (click)="openDialog()"
+      (click)="openDialog(row)"
     ></mat-row>
   </mat-table>
 </div>
