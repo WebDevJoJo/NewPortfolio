@@ -22,7 +22,7 @@ export interface CompanyDetails {
   addresses: CompanyAddresses[];
   website: string;
   image: string;
-  contact: CompanyContact[];
+  contact: CompanyContact;
 }
 
 export interface CompanyAddresses {
@@ -46,7 +46,7 @@ export interface CompanyContact {
   phone: number;
   birthday: number;
   gender: string;
-  address: ContactAddress[];
+  address: ContactAddress;
   website: string;
   image: string;
 }
@@ -72,10 +72,6 @@ export interface ContactAddress {
 })
 export class PartnerCompaniesComponent implements OnInit {
   extendedDetails: CompanyDetails[] = [];
-  filtersCategoryNotApplied: string = 'Name, Email, VAT, Phone, Country';
-  filtersCategoryApplied: string =
-    this.filtersCategoryNotApplied + ' | FILTERS APPLIED!';
-  filtersCategory: string = this.filtersCategoryNotApplied;
   companiesList: CompanyDetails[] = [];
   countriesList: string[] = [];
   countriesSortedList: string[] = [];
@@ -136,32 +132,17 @@ export class PartnerCompaniesComponent implements OnInit {
           item.vat
             .toString()
             .toLowerCase()
-            .includes(this.searchVat.toLowerCase()) &&
+            .includes(this.searchVat.toString().toLowerCase()) &&
           item.phone
             .toString()
             .toLowerCase()
-            .includes(this.searchPhone.toLowerCase()) &&
+            .includes(this.searchPhone.toString().toLowerCase()) &&
           item.country.includes(this.searchCountry)
       );
     } else {
       this.filteredCompanies = this.companiesList;
     }
     this.dataSource = this.filteredCompanies;
-  }
-
-  checkFilters(): void {
-    if (
-      (this.searchName ||
-        this.searchEmail ||
-        this.searchVat ||
-        this.searchPhone ||
-        this.searchCountry) &&
-      this.filteredCompanies.length != 100
-    ) {
-      this.filtersCategory = this.filtersCategoryApplied;
-    } else {
-      this.companiesFilters();
-    }
   }
 
   resetCompaniesFilters() {
@@ -175,9 +156,9 @@ export class PartnerCompaniesComponent implements OnInit {
 
   constructor(public dialog: MatDialog) {}
 
-  openDialog(): void {
+  openDialog(row: CompanyDetails): void {
     const dialogRef = this.dialog.open(DialogCompany, {
-      data: { extendedDetails: this.companiesList },
+      data: row,
     });
 
     dialogRef.afterClosed().subscribe((result) => {
