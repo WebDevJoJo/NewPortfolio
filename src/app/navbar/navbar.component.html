@@ -24,16 +24,18 @@
       <mat-icon class="material-symbols-rounded">alternate_email</mat-icon>
       Contacts
     </button>
+  </mat-menu>
+  <button mat-icon-button [matMenuTriggerFor]="beforeMenu2">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+  <mat-menu #beforeMenu2="matMenu" xPosition="before">
     <button mat-menu-item routerLink="/access">
       <mat-icon class="material-symbols-rounded">login</mat-icon>
       Access
     </button>
     <button mat-menu-item routerLink="/personal-area">
       <mat-icon class="material-symbols-rounded">accessibility_new</mat-icon>
-      Personal Area
+      personal-area
     </button>
   </mat-menu>
-  <button mat-icon-button>
-    <mat-icon class="material-symbols-rounded">share</mat-icon>
-  </button>
 </mat-toolbar>

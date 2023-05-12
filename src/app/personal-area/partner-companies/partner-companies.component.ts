@@ -74,6 +74,8 @@ export interface ContactAddress {
 export class PartnerCompaniesComponent implements OnInit {
   extendedDetails: CompanyDetails[] = [];
   companiesList: CompanyDetails[] = [];
+  filteredCompanies: CompanyDetails[] = [];
+  dataSource: CompanyDetails[] = [];
   countriesList: string[] = [];
   countriesSortedList: string[] = [];
   displayedColumns: string[] = [
@@ -84,14 +86,13 @@ export class PartnerCompaniesComponent implements OnInit {
     'country',
     'addresses',
   ];
-  dataSource: CompanyDetails[] = [];
   searchName: string = '';
   searchEmail: string = '';
   searchVat: string = '';
   searchPhone: string = '';
   searchCountry: string = '';
   selectedCountry = '';
-  filteredCompanies = this.companiesList;
+
   callParams = new HttpParams();
 
   constructor(private http: HttpClient, public dialog: MatDialog) {}
@@ -101,17 +102,16 @@ export class PartnerCompaniesComponent implements OnInit {
     this.callParams = this.callParams.append('_quantity', 100);
     this.http
       .get<Response>(url, { params: this.callParams })
-      .subscribe((response: Response) => {
-        this.companiesList.push(...response.data);
+      .subscribe((data) => {
+        this.companiesList = data.data;
+        this.filteredCompanies = this.companiesList;
+        this.dataSource = this.filteredCompanies;
+        this.filteredCompanies.forEach((company) => {
+          this.countriesList.push(company.country);
+          this.countriesList.sort();
+        });
+        this.countriesSortedList = [...new Set(this.countriesList)];
       });
-    this.countriesList = this.companiesList.map((company) => company.country);
-    this.dataSource = this.companiesList;
-    this.sortedCountriesFilterConstructor();
-  }
-
-  sortedCountriesFilterConstructor() {
-    this.countriesList.sort();
-    this.countriesSortedList = [...new Set(this.countriesList)];
   }
 
   companiesFilters(): void {
