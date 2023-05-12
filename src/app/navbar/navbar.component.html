@@ -1,1 +1,39 @@
-<p>navbar works!</p>
+<mat-toolbar color="primary">
+  <button mat-icon-button>
+    <mat-icon class="material-symbols-rounded"> apps </mat-icon>
+  </button>
+  <span>Portfolio</span>
+  <span class="spacer"></span>
+  <button mat-icon-button [matMenuTriggerFor]="beforeMenu">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #beforeMenu="matMenu" xPosition="before">
+    <button mat-menu-item routerLink="/home">
+      <mat-icon class="material-symbols-rounded">home</mat-icon>
+      Home
+    </button>
+    <button mat-menu-item routerLink="/about">
+      <mat-icon class="material-symbols-rounded">question_mark</mat-icon>
+      About
+    </button>
+    <button mat-menu-item routerLink="/portfolio">
+      <mat-icon class="material-symbols-rounded">storage</mat-icon>
+      Portfolio
+    </button>
+    <button mat-menu-item routerLink="/contacts">
+      <mat-icon class="material-symbols-rounded">alternate_email</mat-icon>
+      Contacts
+    </button>
+    <button mat-menu-item routerLink="/access">
+      <mat-icon class="material-symbols-rounded">login</mat-icon>
+      Access
+    </button>
+    <button mat-menu-item routerLink="/personal-area">
+      <mat-icon class="material-symbols-rounded">accessibility_new</mat-icon>
+      Personal Area
+    </button>
+  </mat-menu>
+  <button mat-icon-button>
+    <mat-icon class="material-symbols-rounded">share</mat-icon>
+  </button>
+</mat-toolbar>
