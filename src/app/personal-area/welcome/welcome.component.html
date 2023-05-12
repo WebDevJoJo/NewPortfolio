@@ -9,19 +9,19 @@
   </div>
   <div class="row m-5">
     <div class="col">
-      <button mat-fab extended color="accent" routerLink="/preventive">
+      <button mat-fab extended color="accent" [routerLink]="['preventive']">
         <mat-icon>calculate</mat-icon>
         Preventive
       </button>
     </div>
     <div class="col">
-      <button mat-fab extended color="accent" routerLink="/payment">
+      <button mat-fab extended color="accent" routerLink="payment">
         <mat-icon>payments</mat-icon>
         Payment
       </button>
     </div>
     <div class="col">
-      <button mat-fab extended color="accent" routerLink="/companies">
+      <button mat-fab extended color="accent" [routerLink]="['companies']">
         <mat-icon>corporate_fare</mat-icon>
         Partner companies
       </button>
