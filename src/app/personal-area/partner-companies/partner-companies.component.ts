@@ -1,4 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import {
   MatDialog,
   MAT_DIALOG_DATA,
@@ -91,26 +92,20 @@ export class PartnerCompaniesComponent implements OnInit {
   searchCountry: string = '';
   selectedCountry = '';
   filteredCompanies = this.companiesList;
+  callParams = new HttpParams();
+
+  constructor(private http: HttpClient, public dialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.populateCompaniesListCountriesList();
-  }
-
-  async fetchData(): Promise<CompanyDetails[]> {
-    const params = new URLSearchParams();
-    params.append('_quantity', '100');
-    const url = new URL('https://fakerapi.it/api/v1/companies');
-    url.search = params.toString();
-    const response = await fetch(url.toString());
-    const data = await response.json();
-    return data.data as CompanyDetails[];
-  }
-
-  async populateCompaniesListCountriesList(): Promise<void> {
-    const companiesList = await this.fetchData();
-    this.companiesList.push(...companiesList);
-    this.countriesList = companiesList.map((company) => company.country);
-    this.dataSource = companiesList;
+    const url = 'https://fakerapi.it/api/v1/companies';
+    this.callParams = this.callParams.append('_quantity', 100);
+    this.http
+      .get<Response>(url, { params: this.callParams })
+      .subscribe((response: Response) => {
+        this.companiesList.push(...response.data);
+      });
+    this.countriesList = this.companiesList.map((company) => company.country);
+    this.dataSource = this.companiesList;
     this.sortedCountriesFilterConstructor();
   }
 
@@ -155,8 +150,6 @@ export class PartnerCompaniesComponent implements OnInit {
     this.searchCountry = '';
     this.companiesFilters();
   }
-
-  constructor(public dialog: MatDialog) {}
 
   openDialog(row: CompanyDetails): void {
     const dialogRef = this.dialog.open(DialogCompany, {
