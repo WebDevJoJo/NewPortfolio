@@ -40,15 +40,33 @@
       <h3>Something about me:</h3>
     </div>
     <div class="col">
-      <button mat-fab extended color="primary" class="mx-3">
+      <button
+        mat-fab
+        extended
+        color="primary"
+        class="mx-3"
+        [routerLink]="['about']"
+      >
         About
         <mat-icon>question_mark</mat-icon>
       </button>
-      <button mat-fab extended color="primary" class="mx-3">
+      <button
+        mat-fab
+        extended
+        color="primary"
+        class="mx-3"
+        [routerLink]="['portfolio']"
+      >
         Portfolio
         <mat-icon>storage</mat-icon>
       </button>
-      <button mat-fab extended color="primary" class="mx-3">
+      <button
+        mat-fab
+        extended
+        color="primary"
+        class="mx-3"
+        [routerLink]="['contacts']"
+      >
         Contacts
         <mat-icon>alternate_email</mat-icon>
       </button>
