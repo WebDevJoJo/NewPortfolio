@@ -160,6 +160,11 @@ export class PartnerCompaniesComponent implements OnInit {
       console.log('Dialog closed');
     });
   }
+
+  dataJsonCreate(): void {
+    const json = JSON.stringify(this.companiesList[0].name);
+    console.log(json);
+  }
 }
 
 @Component({
