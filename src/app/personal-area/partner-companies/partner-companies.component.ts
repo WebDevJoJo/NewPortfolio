@@ -1,6 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import {
   MatDialog,
   MAT_DIALOG_DATA,
@@ -100,7 +99,7 @@ export class PartnerCompaniesComponent implements OnInit {
 
   ngOnInit(): void {
     const url = 'https://fakerapi.it/api/v1/companies';
-    //this.callParams = this.callParams.append('_quantity', 100);
+    this.callParams = this.callParams.append('_quantity', 100);
     this.http
       .get<Response>(url, { params: this.callParams })
       .subscribe((data) => {
@@ -113,25 +112,6 @@ export class PartnerCompaniesComponent implements OnInit {
         });
         this.countriesSortedList = [...new Set(this.countriesList)];
       });
-  }
-
-  changeHttpRequest() {
-    const requestBody = {
-      name: 'Changed company',
-      city: 'Changetown',
-    };
-
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    const url = 'https://fakerapi.it/api/v1/companies';
-    this.http.patch(url, requestBody, { headers }).subscribe(
-      (response) => {
-        const responseBody = JSON.parse(JSON.stringify(response));
-        console.log(responseBody);
-      },
-      (error) => {
-        console.error('An error occurred:', error);
-      }
-    );
   }
 
   companiesFilters(): void {
@@ -169,7 +149,6 @@ export class PartnerCompaniesComponent implements OnInit {
     this.searchPhone = '';
     this.searchCountry = '';
     this.companiesFilters();
-    this.changeHttpRequest();
   }
 
   openDialog(row: CompanyDetails): void {
