@@ -5,6 +5,7 @@ import {
   MAT_DIALOG_DATA,
   MatDialogRef,
 } from '@angular/material/dialog';
+import { findIndex } from 'rxjs';
 
 export interface Response {
   status: string;
@@ -160,23 +161,25 @@ export class PartnerCompaniesComponent implements OnInit {
       console.log('Dialog closed');
     });
   }
-
-  dataJsonCreate(): void {
-    const json = JSON.stringify(this.companiesList[0].name);
-    console.log(json);
-  }
 }
 
 @Component({
   selector: 'dialog-company',
   templateUrl: 'dialog-company.html',
+  styleUrls: ['./partner-companies.component.scss'],
 })
 export class DialogCompany {
   constructor(
     public dialogRef: MatDialogRef<DialogCompany>,
     @Inject(MAT_DIALOG_DATA) public data: CompanyDetails
   ) {}
+
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  dataJsonCreate(): void {
+    const json = JSON.stringify(this.data);
+    console.log(json);
   }
 }
