@@ -118,7 +118,6 @@ export class PartnerCompaniesComponent implements OnInit {
   changeHttpRequest() {
     const requestBody = {
       name: 'Changed company',
-      address: '123 Changed St.',
       city: 'Changetown',
     };
 
@@ -170,6 +169,7 @@ export class PartnerCompaniesComponent implements OnInit {
     this.searchPhone = '';
     this.searchCountry = '';
     this.companiesFilters();
+    this.changeHttpRequest();
   }
 
   openDialog(row: CompanyDetails): void {
