@@ -5,41 +5,19 @@
       <mat-expansion-panel-header>
         <mat-panel-title>General</mat-panel-title>
       </mat-expansion-panel-header>
-      <mat-list role="list">
-        <mat-list-item role="listitem">
-          Name: {{data.name}} |
-          <button mat-icon-button color="accent">
-            <mat-icon>edit</mat-icon>
-          </button>
-        </mat-list-item>
-        <mat-list-item role="listitem">
-          Email: {{data.email}} |
-          <button mat-icon-button color="accent">
-            <mat-icon>edit</mat-icon>
-          </button>
-        </mat-list-item>
-        <mat-list-item role="listitem">
-          VAT: {{data.vat}} |
-          <button mat-icon-button color="accent">
-            <mat-icon>edit</mat-icon>
-          </button>
-        </mat-list-item>
-        <mat-list-item role="listitem">
-          Phone: {{data.phone}} |
-          <button mat-icon-button color="accent">
-            <mat-icon>edit</mat-icon>
-          </button>
-        </mat-list-item>
-        <mat-list-item role="listitem">
-          Country: {{data.country}} |
-          <button mat-icon-button color="accent">
-            <mat-icon>edit</mat-icon>
-          </button>
-        </mat-list-item>
-        <mat-list-item role="listitem">
-          Website: {{data.website}}
-        </mat-list-item>
-      </mat-list>
+      <div class="row m-2 align-items-center">
+        Name: {{data.name}}
+        <button mat-icon-button color="accent" (click)="dataJsonCreate()">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <mat-form-field>
+          <mat-label>New name</mat-label>
+          <input matInput placeholder="Company Inc." value="" />
+        </mat-form-field>
+        <button mat-icon-button color="accent">
+          <mat-icon>published_with_changes</mat-icon>
+        </button>
+      </div>
     </mat-expansion-panel>
     <mat-expansion-panel>
       <mat-expansion-panel-header>
@@ -92,3 +70,54 @@
 <div mat-dialog-actions class="m-3">
   <button mat-stroked-button color="warn" (click)="onNoClick()">Cancel</button>
 </div>
+
+<!-- 
+<mat-list role="list">
+  <mat-list-item role="listitem" class="larger-item">
+    Name: {{data.name}} |
+    <button mat-icon-button color="accent" (click)="dataJsonCreate()">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <div>
+      <mat-form-field>
+        <mat-label>New name</mat-label>
+        <input matInput placeholder="Company Inc." value="" />
+      </mat-form-field>
+      <button mat-icon-button color="accent">
+        <mat-icon>published_with_changes</mat-icon>
+      </button>
+    </div>
+  </mat-list-item>
+  <mat-list-item role="listitem">
+    Email: {{data.email}} |
+    <button mat-icon-button color="accent">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <mat-form-field class="mt-4">
+      <mat-label>New email</mat-label>
+      <input matInput placeholder="email@domain.x" value="" />
+    </mat-form-field>
+    <button mat-icon-button color="accent">
+      <mat-icon>published_with_changes</mat-icon>
+    </button>
+  </mat-list-item>
+  <mat-list-item role="listitem">
+    VAT: {{data.vat}} |
+    <button mat-icon-button color="accent">
+      <mat-icon>edit</mat-icon>
+    </button>
+  </mat-list-item>
+  <mat-list-item role="listitem">
+    Phone: {{data.phone}} |
+    <button mat-icon-button color="accent">
+      <mat-icon>edit</mat-icon>
+    </button>
+  </mat-list-item>
+  <mat-list-item role="listitem">
+    Country: {{data.country}} |
+    <button mat-icon-button color="accent">
+      <mat-icon>edit</mat-icon>
+    </button>
+  </mat-list-item>
+  <mat-list-item role="listitem"> Website: {{data.website}} </mat-list-item>
+</mat-list> -->
