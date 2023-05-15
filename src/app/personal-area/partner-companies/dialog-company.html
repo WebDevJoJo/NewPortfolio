@@ -6,12 +6,39 @@
         <mat-panel-title>General</mat-panel-title>
       </mat-expansion-panel-header>
       <mat-list role="list">
-        <mat-list-item role="listitem">Name: {{data.name}}</mat-list-item>
-        <mat-list-item role="listitem">Email: {{data.email}}</mat-list-item>
-        <mat-list-item role="listitem">VAT: {{data.vat}}</mat-list-item>
-        <mat-list-item role="listitem">Phone: {{data.phone}}</mat-list-item>
-        <mat-list-item role="listitem">Country: {{data.country}}</mat-list-item>
-        <mat-list-item role="listitem">Website: {{data.website}}</mat-list-item>
+        <mat-list-item role="listitem">
+          Name: {{data.name}} |
+          <button mat-icon-button color="accent">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </mat-list-item>
+        <mat-list-item role="listitem">
+          Email: {{data.email}} |
+          <button mat-icon-button color="accent">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </mat-list-item>
+        <mat-list-item role="listitem">
+          VAT: {{data.vat}} |
+          <button mat-icon-button color="accent">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </mat-list-item>
+        <mat-list-item role="listitem">
+          Phone: {{data.phone}} |
+          <button mat-icon-button color="accent">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </mat-list-item>
+        <mat-list-item role="listitem">
+          Country: {{data.country}} |
+          <button mat-icon-button color="accent">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </mat-list-item>
+        <mat-list-item role="listitem">
+          Website: {{data.website}}
+        </mat-list-item>
       </mat-list>
     </mat-expansion-panel>
     <mat-expansion-panel>
@@ -53,7 +80,8 @@
           Website: {{data.contact.website}}
         </mat-list-item>
         <mat-list-item role="listitem">
-          Address: {{data.contact.address.buildingNumber}},
+          Address: {{data.contact.address.street}}
+          {{data.contact.address.buildingNumber}},
           {{data.contact.address.streetName}} {{data.contact.address.city}}
           ({{data.contact.address.zipcode}})
         </mat-list-item>
