@@ -23,14 +23,10 @@
               matInput
               placeholder="Company Inc."
               value=""
-              [ngModel]="newName"
+              [(ngModel)]="newName"
             />
           </mat-form-field>
-          <button
-            mat-icon-button
-            color="accent"
-            (click)="onClickModify(newName)"
-          >
+          <button mat-icon-button color="accent" (click)="patchFunction()">
             <mat-icon>published_with_changes</mat-icon>
           </button>
         </div>
