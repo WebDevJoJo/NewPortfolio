@@ -93,6 +93,9 @@ export class PartnerCompaniesComponent implements OnInit {
   searchPhone: string = '';
   searchCountry: string = '';
   selectedCountry = '';
+  currentPage: number = 1;
+  pageSize: number = 10;
+  totalItems: number = this.filteredCompanies.length;
 
   callParams = new HttpParams();
 
@@ -106,13 +109,14 @@ export class PartnerCompaniesComponent implements OnInit {
       .subscribe((data) => {
         this.companiesList = data.data;
         this.filteredCompanies = this.companiesList;
-        this.dataSource = this.filteredCompanies;
+        //this.dataSource = this.filteredCompanies;
         this.filteredCompanies.forEach((company) => {
           this.countriesList.push(company.country);
           this.countriesList.sort();
         });
         this.countriesSortedList = [...new Set(this.countriesList)];
       });
+    this.dataSource = new MatTableDataSource<Company>(this.getDataSlice());
   }
 
   companiesFilters(): void {
