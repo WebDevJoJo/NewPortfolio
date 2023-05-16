@@ -171,6 +171,12 @@ export class PartnerCompaniesComponent implements OnInit {
 export class DialogCompany {
   apiUrl: string = '';
   newName: string = '';
+  showElementNameInput: boolean = false;
+  showElementEmailInput: boolean = false;
+  showElementVatInput: boolean = false;
+  showElementPhoneInput: boolean = false;
+  showElementWebsiteInput: boolean = false;
+
   constructor(
     public dialogRef: MatDialogRef<DialogCompany>,
     @Inject(MAT_DIALOG_DATA) public data: CompanyDetails,
@@ -204,5 +210,21 @@ export class DialogCompany {
         console.log('Update failed:', error);
       }
     );
+  }
+
+  toggleElementNameInput() {
+    this.showElementNameInput = !this.showElementNameInput;
+  }
+  toggleElementEmailInput() {
+    this.showElementEmailInput = !this.showElementEmailInput;
+  }
+  toggleElementVatInput() {
+    this.showElementVatInput = !this.showElementVatInput;
+  }
+  toggleElementPhoneInput() {
+    this.showElementPhoneInput = !this.showElementPhoneInput;
+  }
+  toggleElementWebsiteInput() {
+    this.showElementWebsiteInput = !this.showElementWebsiteInput;
   }
 }
