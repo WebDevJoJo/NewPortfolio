@@ -169,17 +169,40 @@ export class PartnerCompaniesComponent implements OnInit {
   styleUrls: ['./partner-companies.component.scss'],
 })
 export class DialogCompany {
+  apiUrl: string = '';
+  newName: string = '';
   constructor(
     public dialogRef: MatDialogRef<DialogCompany>,
-    @Inject(MAT_DIALOG_DATA) public data: CompanyDetails
+    @Inject(MAT_DIALOG_DATA) public data: CompanyDetails,
+    private http: HttpClient
   ) {}
+
+  ngOnInit() {
+    const json = JSON.stringify(this.data);
+    const urlEncodedString = encodeURIComponent(json);
+    console.log(urlEncodedString);
+    const apiUrl = urlEncodedString;
+    console.log('--------------------------------');
+    console.log(apiUrl);
+    console.log(json);
+  }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
 
-  dataJsonCreate(): void {
-    const json = JSON.stringify(this.data);
-    console.log(json);
+  onClickModify(newName: string) {
+    const payload = {
+      [this.data.name]: newName,
+    };
+
+    this.http.patch(this.apiUrl, payload).subscribe(
+      () => {
+        console.log('Update successful');
+      },
+      (error) => {
+        console.log('Update failed:', error);
+      }
+    );
   }
 }
