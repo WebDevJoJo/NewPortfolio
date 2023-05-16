@@ -183,33 +183,8 @@ export class DialogCompany {
     private http: HttpClient
   ) {}
 
-  ngOnInit() {
-    const json = JSON.stringify(this.data);
-    const urlEncodedString = encodeURIComponent(json);
-    console.log(urlEncodedString);
-    const apiUrl = urlEncodedString;
-    console.log('--------------------------------');
-    console.log(apiUrl);
-    console.log(json);
-  }
-
   onNoClick(): void {
     this.dialogRef.close();
-  }
-
-  onClickModify(newName: string) {
-    const payload = {
-      [this.data.name]: newName,
-    };
-
-    this.http.patch(this.apiUrl, payload).subscribe(
-      () => {
-        console.log('Update successful');
-      },
-      (error) => {
-        console.log('Update failed:', error);
-      }
-    );
   }
 
   toggleElementNameInput() {
@@ -227,4 +202,31 @@ export class DialogCompany {
   toggleElementWebsiteInput() {
     this.showElementWebsiteInput = !this.showElementWebsiteInput;
   }
+
+  patchFunction() {
+    const apiUrl = 'https://fakerapi.it/api/v1/companies';
+
+    const payload = {
+      name: this.newName,
+    };
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+
+    this.http.patch(apiUrl, payload, { headers }).subscribe(
+      (response) => {
+        console.log('Patch success: ', response);
+      },
+      (error) => {
+        console.error('Patch error occurred: ', error);
+      }
+    );
+  }
+
+  // patchCompanyName (newName: string): Observable<{}> {
+  // const url = 'https://fakerapi.it/api/v1/companies';
+  //  return this.httpClient.patch(url, {name: newName}, httpOptions)
+  //    .pipe(catchError(this.handleError('patchError')));
+  // }
 }
