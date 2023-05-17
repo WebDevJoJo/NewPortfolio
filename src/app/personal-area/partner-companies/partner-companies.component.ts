@@ -95,6 +95,11 @@ export class PartnerCompaniesComponent implements OnInit {
   searchPhone: string = '';
   searchCountry: string = '';
   selectedCountry = '';
+  sliceOfFilteredCompanies: CompanyDetails[] = [];
+  startIndex: number = 0;
+  endIndex: number = 0;
+  pageNumber: number = 1;
+  pageLength: number = 10;
 
   callParams = new HttpParams();
 
@@ -110,12 +115,12 @@ export class PartnerCompaniesComponent implements OnInit {
       .subscribe((data) => {
         this.companiesList = data.data;
         this.filteredCompanies = this.companiesList;
-        this.dataSource = this.filteredCompanies;
         this.filteredCompanies.forEach((company) => {
           this.countriesList.push(company.country);
           this.countriesList.sort();
         });
         this.countriesSortedList = [...new Set(this.countriesList)];
+        this.filteredCompaniesArraySlicer();
       });
   }
 
@@ -145,7 +150,8 @@ export class PartnerCompaniesComponent implements OnInit {
     } else {
       this.filteredCompanies = this.companiesList;
     }
-    this.dataSource = this.filteredCompanies;
+    this.pageNumber = 1;
+    this.filteredCompaniesArraySlicer();
   }
 
   //Reset filters function
@@ -156,6 +162,28 @@ export class PartnerCompaniesComponent implements OnInit {
     this.searchPhone = '';
     this.searchCountry = '';
     this.companiesFilters();
+  }
+
+  pageChangerForward() {
+    this.pageNumber++;
+    console.log(this.pageNumber);
+    this.filteredCompaniesArraySlicer();
+  }
+
+  pageChangerBack() {
+    this.pageNumber--;
+    console.log(this.pageNumber);
+    this.filteredCompaniesArraySlicer();
+  }
+
+  filteredCompaniesArraySlicer() {
+    this.startIndex = (this.pageNumber - 1) * this.pageLength;
+    this.endIndex = this.startIndex + this.pageLength;
+    this.sliceOfFilteredCompanies = this.filteredCompanies.slice(
+      this.startIndex,
+      this.endIndex
+    );
+    this.dataSource = this.sliceOfFilteredCompanies;
   }
 
   //Dialog component trigger
