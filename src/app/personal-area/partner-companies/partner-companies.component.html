@@ -113,4 +113,31 @@
       (click)="openDialog(row)"
     ></mat-row>
   </mat-table>
+  <div class="container">
+    <div class="row justify-content-end mt-2">
+      <div class="col-auto">
+        <button
+          *ngIf="pageNumber > 1"
+          mat-icon-button
+          color="accent"
+          (click)="pageChangerBack()"
+        >
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+      </div>
+      <div class="col-auto">
+        <p class="mt-3">{{ pageNumber }}</p>
+      </div>
+      <div class="col-auto">
+        <button
+          *ngIf="pageNumber < 10"
+          mat-icon-button
+          color="accent"
+          (click)="pageChangerForward()"
+        >
+          <mat-icon>arrow_forward</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
