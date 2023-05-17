@@ -114,8 +114,8 @@
     ></mat-row>
   </mat-table>
   <div class="container">
-    <div class="row justify-content-end mt-2">
-      <div class="col-auto">
+    <div class="row justify-content-end">
+      <div class="col-auto mt-2">
         <button
           *ngIf="pageNumber > 1"
           mat-icon-button
@@ -125,18 +125,33 @@
           <mat-icon>arrow_back</mat-icon>
         </button>
       </div>
-      <div class="col-auto">
-        <p class="mt-3">{{ pageNumber }}</p>
+      <div class="col-auto mt-4">
+        <p>{{ pageNumber }}</p>
       </div>
-      <div class="col-auto">
+      <div class="col-auto mt-2">
         <button
-          *ngIf="pageNumber < 10"
+          *ngIf="pageNumber < maxPages"
           mat-icon-button
           color="accent"
           (click)="pageChangerForward()"
         >
           <mat-icon>arrow_forward</mat-icon>
         </button>
+      </div>
+      <div class="col-auto mt-2">
+        <mat-form-field>
+          <mat-label>Items in page</mat-label>
+          <mat-select
+            [(value)]="pageLength"
+            (selectionChange)="pageLengthChanging()"
+          >
+            <mat-option [value]="2">2</mat-option>
+            <mat-option [value]="5">5</mat-option>
+            <mat-option [value]="10" selected>10</mat-option>
+            <mat-option [value]="15">15</mat-option>
+            <mat-option [value]="20">20</mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
     </div>
   </div>
