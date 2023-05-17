@@ -168,14 +168,12 @@ export class PartnerCompaniesComponent implements OnInit {
   //Function that make user navigate forward in table pages
   pageChangerForward() {
     this.pageNumber++;
-    console.log(this.pageNumber);
     this.filteredCompaniesArraySlicer();
   }
 
   //Function that make user navigate back in table pages
   pageChangerBack() {
     this.pageNumber--;
-    console.log(this.pageNumber);
     this.filteredCompaniesArraySlicer();
   }
 
@@ -202,9 +200,7 @@ export class PartnerCompaniesComponent implements OnInit {
       data: row,
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log('Dialog closed');
-    });
+    dialogRef.afterClosed().subscribe((result) => {});
   }
 }
 
@@ -218,6 +214,10 @@ export class DialogCompany {
   //Properties defined and inizialized
   apiUrl: string = '';
   newName: string = '';
+  newEmail: string = '';
+  newVat: string = '';
+  newPhone: string = '';
+  newWebsite: string = '';
   showElementNameInput: boolean = false;
   showElementEmailInput: boolean = false;
   showElementVatInput: boolean = false;
@@ -259,6 +259,10 @@ export class DialogCompany {
 
     const payload = {
       name: this.newName,
+      email: this.newEmail,
+      vat: this.newVat,
+      phone: this.newPhone,
+      website: this.newWebsite,
     };
 
     const headers = new HttpHeaders({
