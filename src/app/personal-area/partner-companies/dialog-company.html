@@ -22,7 +22,7 @@
             <input
               matInput
               placeholder="Company Inc."
-              value=""
+              value="{{data.name}}"
               [(ngModel)]="newName"
             />
           </mat-form-field>
@@ -47,7 +47,7 @@
             <mat-label>New email</mat-label>
             <input matInput placeholder="user@domain.xx" value="" />
           </mat-form-field>
-          <button mat-icon-button color="accent">
+          <button mat-icon-button color="accent" (click)="patchFunction()">
             <mat-icon>published_with_changes</mat-icon>
           </button>
         </div>
@@ -68,7 +68,7 @@
             <mat-label>New VAT</mat-label>
             <input matInput placeholder="123456789" value="" pattern="[0-9]" />
           </mat-form-field>
-          <button mat-icon-button color="accent">
+          <button mat-icon-button color="accent" (click)="patchFunction()">
             <mat-icon>published_with_changes</mat-icon>
           </button>
         </div>
@@ -89,7 +89,7 @@
             <mat-label>New phone</mat-label>
             <input matInput placeholder="123456789" value="" pattern="[0-9]" />
           </mat-form-field>
-          <button mat-icon-button color="accent">
+          <button mat-icon-button color="accent" (click)="patchFunction()">
             <mat-icon>published_with_changes</mat-icon>
           </button>
         </div>
@@ -111,7 +111,7 @@
             <mat-label>New website</mat-label>
             <input matInput placeholder="www.website.domain" value="" />
           </mat-form-field>
-          <button mat-icon-button color="accent">
+          <button mat-icon-button color="accent" (click)="patchFunction()">
             <mat-icon>published_with_changes</mat-icon>
           </button>
         </div>
