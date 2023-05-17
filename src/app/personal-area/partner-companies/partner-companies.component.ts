@@ -6,7 +6,7 @@ import {
   MatDialogRef,
 } from '@angular/material/dialog';
 
-//Interface returned from the API
+//Interface returned from the API, in pieces
 export interface Response {
   status: string;
   code: number;
@@ -100,13 +100,14 @@ export class PartnerCompaniesComponent implements OnInit {
   endIndex: number = 0;
   pageNumber: number = 1;
   pageLength: number = 10;
+  maxPages: number = 10;
 
   callParams = new HttpParams();
 
-  //Constructors for companies page
+  //Constructors for companies page - private and public
   constructor(private http: HttpClient, public dialog: MatDialog) {}
 
-  //Table construction as page appears
+  //Function that populate a companiesList array and a countriesList aray with data from API usin a get call on intializing
   ngOnInit(): void {
     const url = 'https://fakerapi.it/api/v1/companies';
     this.callParams = this.callParams.append('_quantity', 100);
@@ -124,7 +125,7 @@ export class PartnerCompaniesComponent implements OnInit {
       });
   }
 
-  //Filters chained
+  //Function that filter all data by the inputs tiped by user
   companiesFilters(): void {
     if (
       this.searchName ||
@@ -154,7 +155,7 @@ export class PartnerCompaniesComponent implements OnInit {
     this.filteredCompaniesArraySlicer();
   }
 
-  //Reset filters function
+  //Function that reset all filters value to ''
   resetCompaniesFilters() {
     this.searchName = '';
     this.searchEmail = '';
@@ -164,18 +165,26 @@ export class PartnerCompaniesComponent implements OnInit {
     this.companiesFilters();
   }
 
+  //Function that make user navigate forward in table pages
   pageChangerForward() {
     this.pageNumber++;
     console.log(this.pageNumber);
     this.filteredCompaniesArraySlicer();
   }
 
+  //Function that make user navigate back in table pages
   pageChangerBack() {
     this.pageNumber--;
     console.log(this.pageNumber);
     this.filteredCompaniesArraySlicer();
   }
 
+  pageLengthChanging() {
+    this.pageNumber = 1;
+    this.filteredCompaniesArraySlicer();
+  }
+
+  //Function
   filteredCompaniesArraySlicer() {
     this.startIndex = (this.pageNumber - 1) * this.pageLength;
     this.endIndex = this.startIndex + this.pageLength;
@@ -183,6 +192,7 @@ export class PartnerCompaniesComponent implements OnInit {
       this.startIndex,
       this.endIndex
     );
+    this.maxPages = Math.ceil(this.filteredCompanies.length / this.pageLength);
     this.dataSource = this.sliceOfFilteredCompanies;
   }
 
