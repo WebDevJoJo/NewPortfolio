@@ -5,8 +5,9 @@ import {
   MAT_DIALOG_DATA,
   MatDialogRef,
 } from '@angular/material/dialog';
-import { findIndex } from 'rxjs';
+import { MatTableDataSource } from '@angular/material/table';
 
+//Interface returned from the API
 export interface Response {
   status: string;
   code: number;
@@ -66,6 +67,7 @@ export interface ContactAddress {
   longitude: number;
 }
 
+//Companies component - main component
 @Component({
   selector: 'app-partner-companies',
   templateUrl: './partner-companies.component.html',
@@ -73,6 +75,7 @@ export interface ContactAddress {
   providers: [MatDialog],
 })
 export class PartnerCompaniesComponent implements OnInit {
+  //Properties defined and inizialized
   extendedDetails: CompanyDetails[] = [];
   companiesList: CompanyDetails[] = [];
   filteredCompanies: CompanyDetails[] = [];
@@ -93,14 +96,16 @@ export class PartnerCompaniesComponent implements OnInit {
   searchPhone: string = '';
   searchCountry: string = '';
   selectedCountry = '';
-  currentPage: number = 1;
-  pageSize: number = 10;
-  totalItems: number = this.filteredCompanies.length;
+  // currentPage: number = 1;
+  // pageSize: number = 10;
+  // totalItems: number = this.filteredCompanies.length;
 
   callParams = new HttpParams();
 
+  //Constructors for companies page
   constructor(private http: HttpClient, public dialog: MatDialog) {}
 
+  //Table construction as page appears
   ngOnInit(): void {
     const url = 'https://fakerapi.it/api/v1/companies';
     this.callParams = this.callParams.append('_quantity', 100);
@@ -109,16 +114,20 @@ export class PartnerCompaniesComponent implements OnInit {
       .subscribe((data) => {
         this.companiesList = data.data;
         this.filteredCompanies = this.companiesList;
-        //this.dataSource = this.filteredCompanies;
+        this.dataSource = this.filteredCompanies;
         this.filteredCompanies.forEach((company) => {
           this.countriesList.push(company.country);
           this.countriesList.sort();
         });
         this.countriesSortedList = [...new Set(this.countriesList)];
+        // this.totalItems = this.filteredCompanies.length;
+        // console.log(this.totalItems);
+        // this.filteredCompanies = this.dataDivider();
       });
-    this.dataSource = new MatTableDataSource<Company>(this.getDataSlice());
+    //this.dataSource = new MatTableDataSource<CompanyDetails>(this.getDataSlice());
   }
 
+  //Filters chained
   companiesFilters(): void {
     if (
       this.searchName ||
@@ -145,8 +154,10 @@ export class PartnerCompaniesComponent implements OnInit {
       this.filteredCompanies = this.companiesList;
     }
     this.dataSource = this.filteredCompanies;
+    //this.filteredCompanies = this.dataDivider();
   }
 
+  //Reset filters function
   resetCompaniesFilters() {
     this.searchName = '';
     this.searchEmail = '';
@@ -156,6 +167,42 @@ export class PartnerCompaniesComponent implements OnInit {
     this.companiesFilters();
   }
 
+  // //This function make a 10 elements slice of the filteredCompanies array to show in a page
+  // dataDivider(): CompanyDetails[] {
+  //   const startIndex = (this.currentPage - 1) * this.pageSize;
+  //   const endIndex = startIndex + this.pageSize;
+  //   return this.filteredCompanies.slice(startIndex, endIndex);
+  // }
+
+  // onPageChange(page: number) {
+  //   this.currentPage = page;
+  //   this.filteredCompanies = this.dataDivider();
+  // }
+
+  // ngAfterViewInit() {
+  //   const table = document.querySelector('mat-table');
+  //   const rows = Array.from(table!.querySelectorAll('mat-row'));
+  //   this.totalItems = rows.length;
+
+  //   if (rows.length > this.pageSize) {
+  //     const paginationContainer = document.createElement('div');
+  //     paginationContainer.className = 'pagination-container';
+
+  //     const totalPages = Math.ceil(rows.length / this.pageSize);
+  //     for (let i = 1; i <= totalPages; i++) {
+  //       const pageNumber = document.createElement('button');
+  //       pageNumber.innerText = i.toString();
+  //       pageNumber.className = 'pagination-button';
+  //       pageNumber.addEventListener('click', () => {
+  //         this.onPageChange(i);
+  //       });
+  //       paginationContainer.appendChild(pageNumber);
+  //     }
+  //     table?.insertAdjacentElement('afterend', paginationContainer);
+  //   }
+  // }
+
+  //Dialog component trigger
   openDialog(row: CompanyDetails): void {
     const dialogRef = this.dialog.open(DialogCompany, {
       data: row,
@@ -167,12 +214,14 @@ export class PartnerCompaniesComponent implements OnInit {
   }
 }
 
+//Dialog component - secondary
 @Component({
   selector: 'dialog-company',
   templateUrl: 'dialog-company.html',
   styleUrls: ['./partner-companies.component.scss'],
 })
 export class DialogCompany {
+  //Properties defined and inizialized
   apiUrl: string = '';
   newName: string = '';
   showElementNameInput: boolean = false;
@@ -181,16 +230,19 @@ export class DialogCompany {
   showElementPhoneInput: boolean = false;
   showElementWebsiteInput: boolean = false;
 
+  //Dialog component constructors
   constructor(
     public dialogRef: MatDialogRef<DialogCompany>,
     @Inject(MAT_DIALOG_DATA) public data: CompanyDetails,
     private http: HttpClient
   ) {}
 
+  //Dialog closing trigger
   onNoClick(): void {
     this.dialogRef.close();
   }
 
+  //Edit property triggers
   toggleElementNameInput() {
     this.showElementNameInput = !this.showElementNameInput;
   }
@@ -207,6 +259,7 @@ export class DialogCompany {
     this.showElementWebsiteInput = !this.showElementWebsiteInput;
   }
 
+  //Patch call from API (for name)
   patchFunction() {
     const apiUrl = 'https://fakerapi.it/api/v1/companies';
 
