@@ -5,7 +5,6 @@ import {
   MAT_DIALOG_DATA,
   MatDialogRef,
 } from '@angular/material/dialog';
-import { MatTableDataSource } from '@angular/material/table';
 
 //Interface returned from the API
 export interface Response {
@@ -96,9 +95,6 @@ export class PartnerCompaniesComponent implements OnInit {
   searchPhone: string = '';
   searchCountry: string = '';
   selectedCountry = '';
-  // currentPage: number = 1;
-  // pageSize: number = 10;
-  // totalItems: number = this.filteredCompanies.length;
 
   callParams = new HttpParams();
 
@@ -120,11 +116,7 @@ export class PartnerCompaniesComponent implements OnInit {
           this.countriesList.sort();
         });
         this.countriesSortedList = [...new Set(this.countriesList)];
-        // this.totalItems = this.filteredCompanies.length;
-        // console.log(this.totalItems);
-        // this.filteredCompanies = this.dataDivider();
       });
-    //this.dataSource = new MatTableDataSource<CompanyDetails>(this.getDataSlice());
   }
 
   //Filters chained
@@ -154,7 +146,6 @@ export class PartnerCompaniesComponent implements OnInit {
       this.filteredCompanies = this.companiesList;
     }
     this.dataSource = this.filteredCompanies;
-    //this.filteredCompanies = this.dataDivider();
   }
 
   //Reset filters function
@@ -166,41 +157,6 @@ export class PartnerCompaniesComponent implements OnInit {
     this.searchCountry = '';
     this.companiesFilters();
   }
-
-  // //This function make a 10 elements slice of the filteredCompanies array to show in a page
-  // dataDivider(): CompanyDetails[] {
-  //   const startIndex = (this.currentPage - 1) * this.pageSize;
-  //   const endIndex = startIndex + this.pageSize;
-  //   return this.filteredCompanies.slice(startIndex, endIndex);
-  // }
-
-  // onPageChange(page: number) {
-  //   this.currentPage = page;
-  //   this.filteredCompanies = this.dataDivider();
-  // }
-
-  // ngAfterViewInit() {
-  //   const table = document.querySelector('mat-table');
-  //   const rows = Array.from(table!.querySelectorAll('mat-row'));
-  //   this.totalItems = rows.length;
-
-  //   if (rows.length > this.pageSize) {
-  //     const paginationContainer = document.createElement('div');
-  //     paginationContainer.className = 'pagination-container';
-
-  //     const totalPages = Math.ceil(rows.length / this.pageSize);
-  //     for (let i = 1; i <= totalPages; i++) {
-  //       const pageNumber = document.createElement('button');
-  //       pageNumber.innerText = i.toString();
-  //       pageNumber.className = 'pagination-button';
-  //       pageNumber.addEventListener('click', () => {
-  //         this.onPageChange(i);
-  //       });
-  //       paginationContainer.appendChild(pageNumber);
-  //     }
-  //     table?.insertAdjacentElement('afterend', paginationContainer);
-  //   }
-  // }
 
   //Dialog component trigger
   openDialog(row: CompanyDetails): void {
