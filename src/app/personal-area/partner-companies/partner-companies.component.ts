@@ -6,7 +6,7 @@ import {
   MatDialogRef,
 } from '@angular/material/dialog';
 
-//Interface returned from the API, in pieces
+//General interface returned from the API
 export interface Response {
   status: string;
   code: number;
@@ -14,6 +14,7 @@ export interface Response {
   data: CompanyDetails[];
 }
 
+//Object interface inside data of API
 export interface CompanyDetails {
   id: number;
   name: string;
@@ -27,6 +28,7 @@ export interface CompanyDetails {
   contact: CompanyContact;
 }
 
+//Object interface inside addresses of CompanyDetails
 export interface CompanyAddresses {
   id: number;
   street: string;
@@ -40,6 +42,7 @@ export interface CompanyAddresses {
   longitude: number;
 }
 
+//Object interface inside contact of CompanyDetails
 export interface CompanyContact {
   id: number;
   firstname: string;
@@ -53,6 +56,7 @@ export interface CompanyContact {
   image: string;
 }
 
+//Object interface inside address of CompanyContact
 export interface ContactAddress {
   id: number;
   street: string;
@@ -182,7 +186,7 @@ export class PartnerCompaniesComponent implements OnInit {
     this.filteredCompaniesArraySlicer();
   }
 
-  //Function
+  //Function divided the filtered array of companies and show needed slice
   filteredCompaniesArraySlicer() {
     this.startIndex = (this.pageNumber - 1) * this.pageLength;
     this.endIndex = this.startIndex + this.pageLength;
@@ -204,7 +208,7 @@ export class PartnerCompaniesComponent implements OnInit {
   }
 }
 
-//Dialog component - secondary
+//Dialog component - secondary component
 @Component({
   selector: 'dialog-company',
   templateUrl: 'dialog-company.html',
@@ -224,7 +228,7 @@ export class DialogCompany {
   showElementPhoneInput: boolean = false;
   showElementWebsiteInput: boolean = false;
 
-  //Dialog component constructors
+  //Dialog component constructors - public and private
   constructor(
     public dialogRef: MatDialogRef<DialogCompany>,
     @Inject(MAT_DIALOG_DATA) public data: CompanyDetails,
@@ -236,7 +240,7 @@ export class DialogCompany {
     this.dialogRef.close();
   }
 
-  //Edit property triggers
+  //Edit inputs triggers
   toggleElementNameInput() {
     this.showElementNameInput = !this.showElementNameInput;
   }
@@ -253,16 +257,16 @@ export class DialogCompany {
     this.showElementWebsiteInput = !this.showElementWebsiteInput;
   }
 
-  //Patch call from API (for name)
+  //Patch call from API
   patchFunction() {
     const apiUrl = 'https://fakerapi.it/api/v1/companies';
 
     const payload = {
-      name: this.newName,
-      email: this.newEmail,
-      vat: this.newVat,
-      phone: this.newPhone,
-      website: this.newWebsite,
+      name: this.data.name,
+      email: this.data.email,
+      vat: this.data.vat,
+      phone: this.data.phone,
+      website: this.data.website,
     };
 
     const headers = new HttpHeaders({
@@ -278,10 +282,4 @@ export class DialogCompany {
       }
     );
   }
-
-  // patchCompanyName (newName: string): Observable<{}> {
-  // const url = 'https://fakerapi.it/api/v1/companies';
-  //  return this.httpClient.patch(url, {name: newName}, httpOptions)
-  //    .pipe(catchError(this.handleError('patchError')));
-  // }
 }
