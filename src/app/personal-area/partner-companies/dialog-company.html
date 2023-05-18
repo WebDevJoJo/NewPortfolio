@@ -5,133 +5,106 @@
       <mat-expansion-panel-header>
         <mat-panel-title>General</mat-panel-title>
       </mat-expansion-panel-header>
-      <div class="row mt-2 align-items-center">
-        Name: {{data.name}}
-        <button
-          mat-icon-button
-          color="accent"
-          (click)="toggleElementNameInput()"
-        >
-          <mat-icon>edit</mat-icon>
-        </button>
-      </div>
-      <div *ngIf="showElementNameInput" class="row align-items-center">
-        <div class="col-auto">
-          <mat-form-field>
-            <mat-label>New name</mat-label>
-            <input
-              matInput
-              placeholder="Company Inc."
-              [(ngModel)]="data.name"
-            />
-          </mat-form-field>
-          <button mat-icon-button color="accent" (click)="patchFunction()">
-            <mat-icon>published_with_changes</mat-icon>
-          </button>
-        </div>
-      </div>
-      <div class="row mt-2 align-items-center">
-        Email: {{data.email}}
-        <button
-          mat-icon-button
-          color="accent"
-          (click)="toggleElementEmailInput()"
-        >
-          <mat-icon>edit</mat-icon>
-        </button>
-      </div>
-      <div *ngIf="showElementEmailInput" class="row align-items-center">
-        <div class="col-auto">
-          <mat-form-field>
-            <mat-label>New email</mat-label>
-            <input
-              matInput
-              placeholder="user@domain.xx"
-              [(ngModel)]="data.email"
-            />
-          </mat-form-field>
-          <button mat-icon-button color="accent" (click)="patchFunction()">
-            <mat-icon>published_with_changes</mat-icon>
-          </button>
-        </div>
-      </div>
-      <div class="row mt-2 align-items-center">
-        VAT: {{data.vat}}
-        <button
-          mat-icon-button
-          color="accent"
-          (click)="toggleElementVatInput()"
-        >
-          <mat-icon>edit</mat-icon>
-        </button>
-      </div>
-      <div *ngIf="showElementVatInput" class="row align-items-center">
-        <div class="col-auto">
-          <mat-form-field>
-            <mat-label>New VAT</mat-label>
-            <input
-              matInput
-              placeholder="123456789"
-              pattern="[0-9]"
-              [(ngModel)]="data.vat"
-            />
-          </mat-form-field>
-          <button mat-icon-button color="accent" (click)="patchFunction()">
-            <mat-icon>published_with_changes</mat-icon>
-          </button>
-        </div>
-      </div>
-      <div class="row mt-2 align-items-center">
-        Phone number: {{data.phone}}
-        <button
-          mat-icon-button
-          color="accent"
-          (click)="toggleElementPhoneInput()"
-        >
-          <mat-icon>edit</mat-icon>
-        </button>
-      </div>
-      <div *ngIf="showElementPhoneInput" class="row align-items-center">
-        <div class="col-auto">
-          <mat-form-field>
-            <mat-label>New phone</mat-label>
-            <input
-              matInput
-              placeholder="123456789"
-              value=""
-              pattern="[0-9]"
-              [(ngModel)]="data.phone"
-            />
-          </mat-form-field>
-          <button mat-icon-button color="accent" (click)="patchFunction()">
-            <mat-icon>published_with_changes</mat-icon>
-          </button>
-        </div>
-      </div>
-      <div class="row mt-2 align-items-center">Country: {{data.country}}</div>
-      <div class="row mt-2 align-items-center">
-        Website: {{data.website}}
-        <button
-          mat-icon-button
-          color="accent"
-          (click)="toggleElementWebsiteInput()"
-        >
-          <mat-icon>edit</mat-icon>
-        </button>
-      </div>
-      <div *ngIf="showElementWebsiteInput" class="row align-items-center">
-        <div class="col-auto">
-          <mat-form-field>
-            <mat-label>New website</mat-label>
-            <input
-              matInput
-              placeholder="www.website.domain"
-              [(ngModel)]="data.website"
-            />
-          </mat-form-field>
-          <button mat-icon-button color="accent" (click)="patchFunction()">
-            <mat-icon>published_with_changes</mat-icon>
-          </button>
+      <div class="container">
+        <div class="row">
+          <div class="col m-4">
+            <div class="row mt-4">Name: {{data.name}}</div>
+            <div class="row mt-4">Email: {{data.email}}</div>
+            <div class="row mt-4">VAT: {{data.vat}}</div>
+            <div class="row mt-4">Phone number: {{data.phone}}</div>
+            <div class="row mt-4">Coutry: {{data.country}}</div>
+            <div class="row mt-4">Website: {{data.website}}</div>
+            <div
+              class="row mt-4 justify-content-end"
+              *ngIf="showEditingTriggerButton"
+            >
+              <div class="col-auto">
+                <button
+                  mat-flat-button
+                  color="accent"
+                  (click)="toggleElementsEditing()"
+                >
+                  Edit
+                  <mat-icon>edit</mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="col" *ngIf="showElementsEditingInput">
+            <div class="row">
+              <mat-form-field>
+                <mat-label>New name</mat-label>
+                <input
+                  matInput
+                  placeholder="Company Inc."
+                  [(ngModel)]="newName"
+                />
+              </mat-form-field>
+            </div>
+            <div class="row">
+              <mat-form-field>
+                <mat-label>New email</mat-label>
+                <input
+                  matInput
+                  placeholder="user@domain.xx"
+                  [(ngModel)]="newEmail"
+                />
+              </mat-form-field>
+            </div>
+            <div class="row">
+              <mat-form-field>
+                <mat-label>New VAT</mat-label>
+                <input
+                  matInput
+                  placeholder="1234567890"
+                  type="number"
+                  [(ngModel)]="newVat"
+                />
+              </mat-form-field>
+            </div>
+            <div class="row">
+              <mat-form-field>
+                <mat-label>New phone number</mat-label>
+                <input
+                  matInput
+                  placeholder="+1234567890"
+                  type="tel"
+                  [(ngModel)]="newPhone"
+                />
+              </mat-form-field>
+            </div>
+            <div class="row">
+              <mat-form-field>
+                <mat-label>New Website</mat-label>
+                <input
+                  matInput
+                  placeholder="www.companysite.com"
+                  [(ngModel)]="newWebsite"
+                />
+              </mat-form-field>
+            </div>
+            <div class="row mt-4 justify-content-end">
+              <div class="col-auto">
+                <button
+                  mat-stroked-button
+                  color="warn"
+                  (click)="toggleElementsEditing()"
+                >
+                  Cancel
+                </button>
+              </div>
+              <div class="col-auto">
+                <button
+                  mat-flat-button
+                  color="accent"
+                  (click)="patchFunction()"
+                >
+                  Save
+                  <mat-icon>published_with_changes</mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </mat-expansion-panel>
@@ -183,6 +156,6 @@
     </mat-expansion-panel>
   </mat-accordion>
 </div>
-<div mat-dialog-actions class="m-3">
-  <button mat-stroked-button color="warn" (click)="onNoClick()">Cancel</button>
+<div mat-dialog-actions class="m-4 justify-content-end">
+  <button mat-flat-button color="warn" (click)="onNoClick()">Close</button>
 </div>
