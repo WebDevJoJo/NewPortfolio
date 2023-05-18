@@ -217,16 +217,13 @@ export class PartnerCompaniesComponent implements OnInit {
 export class DialogCompany {
   //Properties defined and inizialized
   apiUrl: string = '';
-  newName: string = '';
-  newEmail: string = '';
-  newVat: string = '';
-  newPhone: string = '';
-  newWebsite: string = '';
-  showElementNameInput: boolean = false;
-  showElementEmailInput: boolean = false;
-  showElementVatInput: boolean = false;
-  showElementPhoneInput: boolean = false;
-  showElementWebsiteInput: boolean = false;
+  newName: string = this.data.name;
+  newEmail: string = this.data.email;
+  newVat: number = this.data.vat;
+  newPhone: number = this.data.phone;
+  newWebsite: string = this.data.website;
+  showEditingTriggerButton: boolean = true;
+  showElementsEditingInput: boolean = false;
 
   //Dialog component constructors - public and private
   constructor(
@@ -241,20 +238,9 @@ export class DialogCompany {
   }
 
   //Edit inputs triggers
-  toggleElementNameInput() {
-    this.showElementNameInput = !this.showElementNameInput;
-  }
-  toggleElementEmailInput() {
-    this.showElementEmailInput = !this.showElementEmailInput;
-  }
-  toggleElementVatInput() {
-    this.showElementVatInput = !this.showElementVatInput;
-  }
-  toggleElementPhoneInput() {
-    this.showElementPhoneInput = !this.showElementPhoneInput;
-  }
-  toggleElementWebsiteInput() {
-    this.showElementWebsiteInput = !this.showElementWebsiteInput;
+  toggleElementsEditing() {
+    this.showElementsEditingInput = !this.showElementsEditingInput;
+    this.showEditingTriggerButton = !this.showEditingTriggerButton;
   }
 
   //Patch call from API
@@ -262,11 +248,11 @@ export class DialogCompany {
     const apiUrl = 'https://fakerapi.it/api/v1/companies';
 
     const payload = {
-      name: this.data.name,
-      email: this.data.email,
-      vat: this.data.vat,
-      phone: this.data.phone,
-      website: this.data.website,
+      name: this.newName,
+      email: this.newEmail,
+      vat: this.newVat,
+      phone: this.newPhone,
+      website: this.newWebsite,
     };
 
     const headers = new HttpHeaders({
