@@ -259,13 +259,21 @@ export class DialogCompany {
       'Content-Type': 'application/json',
     });
 
-    this.http.patch(apiUrl, payload, { headers }).subscribe(
-      (response) => {
-        console.log('Patch success: ', response);
-      },
-      (error) => {
-        console.error('Patch error occurred: ', error);
-      }
-    );
+    if (
+      this.newName != this.data.name ||
+      this.newEmail != this.data.email ||
+      this.newVat != this.data.vat ||
+      this.newPhone != this.data.phone ||
+      this.newWebsite != this.data.website
+    ) {
+      this.http.patch(apiUrl, payload, { headers }).subscribe(
+        (response) => {
+          console.log('Patch success: ', response);
+        },
+        (error) => {
+          console.error('Patch error occurred: ', error);
+        }
+      );
+    }
   }
 }
