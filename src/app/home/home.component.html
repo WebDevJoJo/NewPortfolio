@@ -36,40 +36,48 @@
     </div>
   </div>
   <div class="row m-5">
-    <div class="col text-center self-align-center">
+    <div class="col text-center align-self-center mt-4">
       <h3>Something about me:</h3>
     </div>
     <div class="col">
-      <button
-        mat-fab
-        extended
-        color="primary"
-        class="mx-3"
-        [routerLink]="['about']"
-      >
-        About
-        <mat-icon>question_mark</mat-icon>
-      </button>
-      <button
-        mat-fab
-        extended
-        color="primary"
-        class="mx-3"
-        [routerLink]="['portfolio']"
-      >
-        Portfolio
-        <mat-icon>storage</mat-icon>
-      </button>
-      <button
-        mat-fab
-        extended
-        color="primary"
-        class="mx-3"
-        [routerLink]="['contacts']"
-      >
-        Contacts
-        <mat-icon>alternate_email</mat-icon>
-      </button>
+      <div class="row">
+        <div class="col mt-2">
+          <button
+            mat-fab
+            extended
+            color="primary"
+            class=""
+            [routerLink]="['about']"
+          >
+            About
+            <mat-icon>question_mark</mat-icon>
+          </button>
+        </div>
+        <div class="col mt-2">
+          <button
+            mat-fab
+            extended
+            color="primary"
+            class=""
+            [routerLink]="['portfolio']"
+          >
+            Portfolio
+            <mat-icon>storage</mat-icon>
+          </button>
+        </div>
+        <div class="col mt-2">
+          <button
+            mat-fab
+            extended
+            color="primary"
+            class=""
+            [routerLink]="['contacts']"
+          >
+            Contacts
+            <mat-icon>alternate_email</mat-icon>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
