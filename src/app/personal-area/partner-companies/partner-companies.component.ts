@@ -274,6 +274,12 @@ export class DialogCompany {
           console.error('Patch error occurred: ', error);
         }
       );
+
+      this.data.name = this.newName;
+      this.data.email = this.newEmail;
+      this.data.vat = this.newVat;
+      this.data.phone = this.newPhone;
+      this.data.website = this.newWebsite;
     }
   }
 }

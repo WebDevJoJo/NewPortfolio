@@ -5,106 +5,66 @@
       <mat-expansion-panel-header>
         <mat-panel-title>General</mat-panel-title>
       </mat-expansion-panel-header>
-      <div class="container">
-        <div class="row">
-          <div class="col m-4">
-            <div class="row mt-4">Name: {{data.name}}</div>
-            <div class="row mt-4">Email: {{data.email}}</div>
-            <div class="row mt-4">VAT: {{data.vat}}</div>
-            <div class="row mt-4">Phone number: {{data.phone}}</div>
-            <div class="row mt-4">Coutry: {{data.country}}</div>
-            <div class="row mt-4">Website: {{data.website}}</div>
-            <div
-              class="row mt-4 justify-content-end"
-              *ngIf="showEditingTriggerButton"
-            >
-              <div class="col-auto">
-                <button
-                  mat-flat-button
-                  color="accent"
-                  (click)="toggleElementsEditing()"
-                >
-                  Edit
-                  <mat-icon>edit</mat-icon>
-                </button>
-              </div>
-            </div>
+      <div class="row mt-4">
+        <div class="col">
+          <div class="row">
+            <mat-form-field>
+              <mat-label>New name</mat-label>
+              <input
+                matInput
+                placeholder="Company Inc."
+                [(ngModel)]="newName"
+              />
+            </mat-form-field>
           </div>
-          <div class="col" *ngIf="showElementsEditingInput">
-            <div class="row">
-              <mat-form-field>
-                <mat-label>New name</mat-label>
-                <input
-                  matInput
-                  placeholder="Company Inc."
-                  [(ngModel)]="newName"
-                />
-              </mat-form-field>
-            </div>
-            <div class="row">
-              <mat-form-field>
-                <mat-label>New email</mat-label>
-                <input
-                  matInput
-                  placeholder="user@domain.xx"
-                  [(ngModel)]="newEmail"
-                />
-              </mat-form-field>
-            </div>
-            <div class="row">
-              <mat-form-field>
-                <mat-label>New VAT</mat-label>
-                <input
-                  matInput
-                  placeholder="1234567890"
-                  type="number"
-                  [(ngModel)]="newVat"
-                />
-              </mat-form-field>
-            </div>
-            <div class="row">
-              <mat-form-field>
-                <mat-label>New phone number</mat-label>
-                <input
-                  matInput
-                  placeholder="+1234567890"
-                  type="tel"
-                  [(ngModel)]="newPhone"
-                />
-              </mat-form-field>
-            </div>
-            <div class="row">
-              <mat-form-field>
-                <mat-label>New Website</mat-label>
-                <input
-                  matInput
-                  placeholder="www.companysite.com"
-                  [(ngModel)]="newWebsite"
-                />
-              </mat-form-field>
-            </div>
-            <div class="row mt-4 justify-content-end">
-              <div class="col-auto">
-                <button
-                  mat-stroked-button
-                  color="warn"
-                  (click)="toggleElementsEditing()"
-                >
-                  Cancel
-                </button>
-              </div>
-              <div class="col-auto">
-                <button
-                  mat-flat-button
-                  color="accent"
-                  (click)="patchFunction()"
-                >
-                  Save
-                  <mat-icon>published_with_changes</mat-icon>
-                </button>
-              </div>
-            </div>
+          <div class="row">
+            <mat-form-field>
+              <mat-label>New email</mat-label>
+              <input
+                matInput
+                placeholder="user@domain.xx"
+                [(ngModel)]="newEmail"
+              />
+            </mat-form-field>
           </div>
+          <div class="row">
+            <mat-form-field>
+              <mat-label>New VAT</mat-label>
+              <input
+                matInput
+                placeholder="1234567890"
+                type="number"
+                [(ngModel)]="newVat"
+              />
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field>
+              <mat-label>New phone number</mat-label>
+              <input
+                matInput
+                placeholder="+1234567890"
+                type="tel"
+                [(ngModel)]="newPhone"
+              />
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field>
+              <mat-label>New Website</mat-label>
+              <input
+                matInput
+                placeholder="www.companysite.com"
+                [(ngModel)]="newWebsite"
+              />
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="col align-self-end p-4">
+          <button mat-flat-button color="accent" (click)="patchFunction()">
+            Save
+            <mat-icon>published_with_changes</mat-icon>
+          </button>
         </div>
       </div>
     </mat-expansion-panel>
@@ -112,12 +72,12 @@
       <mat-expansion-panel-header>
         <mat-panel-title>Addresses</mat-panel-title>
       </mat-expansion-panel-header>
-      <div class="row">
-        <div class="col" *ngFor="let addressDetails of data.addresses">
+      <div class="row" *ngFor="let addressDetails of data.addresses">
+        <p>
           - {{addressDetails.street}} {{addressDetails.buildingNumber}},
           {{addressDetails.streetName}} {{addressDetails.city}}
           ({{addressDetails.zipcode}})
-        </div>
+        </p>
       </div>
     </mat-expansion-panel>
     <mat-expansion-panel>
