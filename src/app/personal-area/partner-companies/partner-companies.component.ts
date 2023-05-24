@@ -245,20 +245,6 @@ export class DialogCompany {
 
   //Patch call from API
   patchFunction() {
-    const apiUrl = 'https://fakerapi.it/api/v1/companies';
-
-    const payload = {
-      name: this.newName,
-      email: this.newEmail,
-      vat: this.newVat,
-      phone: this.newPhone,
-      website: this.newWebsite,
-    };
-
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-    });
-
     if (
       this.newName != this.data.name ||
       this.newEmail != this.data.email ||
@@ -266,6 +252,20 @@ export class DialogCompany {
       this.newPhone != this.data.phone ||
       this.newWebsite != this.data.website
     ) {
+      const apiUrl = 'https://fakerapi.it/api/v1/companies';
+
+      const payload = {
+        name: this.newName,
+        email: this.newEmail,
+        vat: this.newVat,
+        phone: this.newPhone,
+        website: this.newWebsite,
+      };
+
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+      });
+
       this.http.patch(apiUrl, payload, { headers }).subscribe(
         (response) => {
           console.log('Patch success: ', response);
@@ -280,6 +280,16 @@ export class DialogCompany {
       this.data.vat = this.newVat;
       this.data.phone = this.newPhone;
       this.data.website = this.newWebsite;
+    } else {
+      console.log('Nothing changed!');
     }
+  }
+
+  resetDetailsInputs() {
+    this.newName = this.data.name;
+    this.newEmail = this.data.email;
+    this.newVat = this.data.vat;
+    this.newPhone = this.data.phone;
+    this.newWebsite = this.data.website;
   }
 }

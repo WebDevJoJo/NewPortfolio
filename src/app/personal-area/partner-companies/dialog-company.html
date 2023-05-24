@@ -60,12 +60,32 @@
             </mat-form-field>
           </div>
         </div>
-        <div class="col align-self-end p-4">
-          <button mat-stroked-button color="warn">Cancel</button>
-          <button mat-flat-button color="accent" (click)="patchFunction()">
-            Save
-            <mat-icon>published_with_changes</mat-icon>
-          </button>
+        <div class="col align-self-center p-4">
+          <div class="row">
+            <div class="col-auto">
+              <button
+                mat-flat-button
+                color="accent"
+                class="m-2"
+                (click)="patchFunction()"
+              >
+                Save
+                <mat-icon>published_with_changes</mat-icon>
+              </button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-auto">
+              <button
+                mat-stroked-button
+                color="warn"
+                class="m-2"
+                (click)="resetDetailsInputs()"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </mat-expansion-panel>
