@@ -124,7 +124,7 @@
     ></mat-row>
   </mat-table>
   <div class="container">
-    <div class="row justify-content-around mt-2">
+    <div class="row justify-content-end mt-2">
       <div class="col-auto">
         <div class="row">
           <div class="col">
@@ -137,9 +137,7 @@
               <mat-icon>arrow_back</mat-icon>
             </button>
           </div>
-          <div class="col mt-3">
-            <p>{{ pageNumber }}</p>
-          </div>
+          <div class="col mt-3">{{ pageNumber }} of {{ maxPages }}</div>
           <div class="col">
             <button
               *ngIf="pageNumber < maxPages"
