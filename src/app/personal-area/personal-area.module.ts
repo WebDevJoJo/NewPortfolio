@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatListModule } from '@angular/material/list';
+import { MatChipsModule } from '@angular/material/chips';
 
 import { WelcomeComponent } from './welcome/welcome.component';
 import { PreventiveComponent } from './preventive/preventive.component';
@@ -49,6 +50,7 @@ const routes: Routes = [
     MatButtonModule,
     MatDialogModule,
     MatListModule,
+    MatChipsModule,
   ],
 })
 export class PersonalAreaModule {}

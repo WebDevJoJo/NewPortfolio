@@ -137,7 +137,12 @@
               <mat-icon>arrow_back</mat-icon>
             </button>
           </div>
-          <div class="col mt-3">{{ pageNumber }} of {{ maxPages }}</div>
+          <div class="col mt-2">
+            <mat-chip>Page {{ pageNumber }} of {{ maxPages }}</mat-chip>
+          </div>
+          <div class="col mt-2">
+            <mat-chip>{{ filteredCompanies.length }} total elements</mat-chip>
+          </div>
           <div class="col">
             <button
               *ngIf="pageNumber < maxPages"
