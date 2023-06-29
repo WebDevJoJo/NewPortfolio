@@ -36,13 +36,24 @@
           <h3 class="mt-2">Do you want to</h3>
         </div>
         <div class="col-auto">
-          <button mat-flat-button color="primary">know me</button>
+          <button
+            mat-flat-button
+            color="primary"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseWidthExample"
+            aria-expanded="false"
+            aria-controls="collapseWidthExample"
+          >
+            know me
+          </button>
         </div>
         <div class="col-auto">
           <h3 class="mt-2">better?</h3>
         </div>
       </div>
     </div>
-    <div class="col"></div>
+    <div class="col collapse collapse-horizontal">
+      <p>ciao</p>
+    </div>
   </div>
 </div>
